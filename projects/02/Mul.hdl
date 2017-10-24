@@ -172,7 +172,25 @@ CHIP Mul{
 	ShiftLeft(in=fout15S12,out=fout15S13);
 	ShiftLeft(in=fout15S13,out=fout15S14);
 	
-	Add16(a=t13,b=fout15S14,out=out);
+	Add16(a=t13,b=fout15S14,out=t14);
 	
+	Mux16(a[0..15]=false,b=a,sel=b[15],out=out16);
+	ShiftLeft(in=out16,out=fout16S1);
+	ShiftLeft(in=fout16S1,out=fout16S2);
+	ShiftLeft(in=fout16S2,out=fout16S3);
+	ShiftLeft(in=fout16S3,out=fout16S4);
+	ShiftLeft(in=fout16S4,out=fout16S5);
+	ShiftLeft(in=fout16S5,out=fout16S6);
+	ShiftLeft(in=fout16S6,out=fout16S7);
+	ShiftLeft(in=fout16S7,out=fout16S8);
+	ShiftLeft(in=fout16S8,out=fout16S9);
+	ShiftLeft(in=fout16S9,out=fout16S10);
+	ShiftLeft(in=fout16S10,out=fout16S11);
+	ShiftLeft(in=fout16S11,out=fout16S12);
+	ShiftLeft(in=fout16S12,out=fout16S13);
+	ShiftLeft(in=fout16S13,out=fout16S14);
+	ShiftLeft(in=fout16S14,out=fout16S15);
+	
+	Add16(a=t14,b=fout16S15,out=out);
 	
 }
