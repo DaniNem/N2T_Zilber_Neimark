@@ -4,193 +4,66 @@ CHIP Mul{
 
     PARTS:
 	Mux16(a[0..15]=false,b=a,sel=b[0],out=out1);
+
+	ShiftLeft(in=a,out=ShiftLeft1);
+	Mux16(a[0..15]=false,b=ShiftLeft1,sel=b[1],out=out2);
+	Add16(a=out1,b=out2,out=t2);
 	
-	Mux16(a[0..15]=false,b=a,sel=b[1],out=out2);
-	ShiftLeft(in=out2,out=fout2S1);
+	ShiftLeft(in=ShiftLeft1,out=ShiftLeft2);
+	Mux16(a[0..15]=false,b=ShiftLeft2,sel=b[2],out=out3);
+	Add16(a=t2,b=out3,out=t3);
 	
-	Add16(a=out1,b=fout2S1,out=t1);
+	ShiftLeft(in=ShiftLeft2,out=ShiftLeft3);
+	Mux16(a[0..15]=false,b=ShiftLeft3,sel=b[3],out=out4);
+	Add16(a=t3,b=out4,out=t4);	
 	
-	Mux16(a[0..15]=false,b=a,sel=b[2],out=out3);
-	ShiftLeft(in=out3,out=fout3S1);
-	ShiftLeft(in=fout3S1,out=fout3S2);
+	ShiftLeft(in=ShiftLeft3,out=ShiftLeft4);
+	Mux16(a[0..15]=false,b=ShiftLeft4,sel=b[4],out=out5);
+	Add16(a=t4,b=out5,out=t5);
 	
-	Add16(a=t1,b=fout3S2,out=t2);
+	ShiftLeft(in=ShiftLeft4,out=ShiftLeft5);
+	Mux16(a[0..15]=false,b=ShiftLeft5,sel=b[5],out=out6);
+	Add16(a=t5,b=out6,out=t6);
 	
-	Mux16(a[0..15]=false,b=a,sel=b[3],out=out4);
-	ShiftLeft(in=out4,out=fout4S1);
-	ShiftLeft(in=fout4S1,out=fout4S2);
-	ShiftLeft(in=fout4S2,out=fout4S3);
+	ShiftLeft(in=ShiftLeft5,out=ShiftLeft6);
+	Mux16(a[0..15]=false,b=ShiftLeft6,sel=b[6],out=out7);
+	Add16(a=t6,b=out7,out=t7);
 	
-	Add16(a=t2,b=fout4S3,out=t3);
+	ShiftLeft(in=ShiftLeft6,out=ShiftLeft7);
+	Mux16(a[0..15]=false,b=ShiftLeft7,sel=b[7],out=out8);
+	Add16(a=t7,b=out8,out=t8);	
 	
+	ShiftLeft(in=ShiftLeft7,out=ShiftLeft8);
+	Mux16(a[0..15]=false,b=ShiftLeft8,sel=b[8],out=out9);
+	Add16(a=t8,b=out9,out=t9);
 	
-	Mux16(a[0..15]=false,b=a,sel=b[4],out=out5);
-	ShiftLeft(in=out5,out=fout5S1);
-	ShiftLeft(in=fout5S1,out=fout5S2);
-	ShiftLeft(in=fout5S2,out=fout5S3);
-	ShiftLeft(in=fout5S3,out=fout5S4);
+	ShiftLeft(in=ShiftLeft8,out=ShiftLeft9);
+	Mux16(a[0..15]=false,b=ShiftLeft9,sel=b[9],out=out10);
+	Add16(a=t9,b=out10,out=t10);
 	
-	Add16(a=t3,b=fout5S4,out=t4);
+	ShiftLeft(in=ShiftLeft9,out=ShiftLeft10);
+	Mux16(a[0..15]=false,b=ShiftLeft10,sel=b[10],out=out11);
+	Add16(a=t10,b=out11,out=t11);
 	
+	ShiftLeft(in=ShiftLeft10,out=ShiftLeft11);
+	Mux16(a[0..15]=false,b=ShiftLeft11,sel=b[11],out=out12);
+	Add16(a=t11,b=out12,out=t12);
 	
-	Mux16(a[0..15]=false,b=a,sel=b[5],out=out6);
-	ShiftLeft(in=out6,out=fout6S1);
-	ShiftLeft(in=fout6S1,out=fout6S2);
-	ShiftLeft(in=fout6S2,out=fout6S3);
-	ShiftLeft(in=fout6S3,out=fout6S4);
-	ShiftLeft(in=fout6S4,out=fout6S5);
+	ShiftLeft(in=ShiftLeft11,out=ShiftLeft12);
+	Mux16(a[0..15]=false,b=ShiftLeft12,sel=b[12],out=out13);
+	Add16(a=t12,b=out13,out=t13);
 	
-	Add16(a=t4,b=fout6S5,out=t5);
+	ShiftLeft(in=ShiftLeft12,out=ShiftLeft13);
+	Mux16(a[0..15]=false,b=ShiftLeft13,sel=b[13],out=out14);
+	Add16(a=t13,b=out14,out=t14);
 	
+	ShiftLeft(in=ShiftLeft13,out=ShiftLeft14);
+	Mux16(a[0..15]=false,b=ShiftLeft14,sel=b[14],out=out15);
+	Add16(a=t14,b=out15,out=t15);
 	
-	Mux16(a[0..15]=false,b=a,sel=b[6],out=out7);
-	ShiftLeft(in=out7,out=fout7S1);
-	ShiftLeft(in=fout7S1,out=fout7S2);
-	ShiftLeft(in=fout7S2,out=fout7S3);
-	ShiftLeft(in=fout7S3,out=fout7S4);
-	ShiftLeft(in=fout7S4,out=fout7S5);
-	ShiftLeft(in=fout7S5,out=fout7S6);
-	
-	Add16(a=t5,b=fout7S6,out=t6);
-	
-	
-	Mux16(a[0..15]=false,b=a,sel=b[7],out=out8);
-	ShiftLeft(in=out8,out=fout8S1);
-	ShiftLeft(in=fout8S1,out=fout8S2);
-	ShiftLeft(in=fout8S2,out=fout8S3);
-	ShiftLeft(in=fout8S3,out=fout8S4);
-	ShiftLeft(in=fout8S4,out=fout8S5);
-	ShiftLeft(in=fout8S5,out=fout8S6);
-	ShiftLeft(in=fout8S6,out=fout8S7);
-	
-	Add16(a=t6,b=fout8S7,out=t7);
-	
-	
-	Mux16(a[0..15]=false,b=a,sel=b[8],out=out9);
-	ShiftLeft(in=out9,out=fout9S1);
-	ShiftLeft(in=fout9S1,out=fout9S2);
-	ShiftLeft(in=fout9S2,out=fout9S3);
-	ShiftLeft(in=fout9S3,out=fout9S4);
-	ShiftLeft(in=fout9S4,out=fout9S5);
-	ShiftLeft(in=fout9S5,out=fout9S6);
-	ShiftLeft(in=fout9S6,out=fout9S7);
-	ShiftLeft(in=fout9S7,out=fout9S8);
-	
-	Add16(a=t7,b=fout9S8,out=t8);
-	
-	Mux16(a[0..15]=false,b=a,sel=b[9],out=out10);
-	ShiftLeft(in=out10,out=fout10S1);
-	ShiftLeft(in=fout10S1,out=fout10S2);
-	ShiftLeft(in=fout10S2,out=fout10S3);
-	ShiftLeft(in=fout10S3,out=fout10S4);
-	ShiftLeft(in=fout10S4,out=fout10S5);
-	ShiftLeft(in=fout10S5,out=fout10S6);
-	ShiftLeft(in=fout10S6,out=fout10S7);
-	ShiftLeft(in=fout10S7,out=fout10S8);
-	ShiftLeft(in=fout10S8,out=fout10S9);
-	
-	Add16(a=t8,b=fout10S9,out=t9);
-	
-	
-	
-	Mux16(a[0..15]=false,b=a,sel=b[10],out=out11);
-	ShiftLeft(in=out11,out=fout11S1);
-	ShiftLeft(in=fout11S1,out=fout11S2);
-	ShiftLeft(in=fout11S2,out=fout11S3);
-	ShiftLeft(in=fout11S3,out=fout11S4);
-	ShiftLeft(in=fout11S4,out=fout11S5);
-	ShiftLeft(in=fout11S5,out=fout11S6);
-	ShiftLeft(in=fout11S6,out=fout11S7);
-	ShiftLeft(in=fout11S7,out=fout11S8);
-	ShiftLeft(in=fout11S8,out=fout11S9);
-	ShiftLeft(in=fout11S9,out=fout11S10);
-	
-	Add16(a=t9,b=fout11S10,out=t10);
-	
-	Mux16(a[0..15]=false,b=a,sel=b[11],out=out12);
-	ShiftLeft(in=out12,out=fout12S1);
-	ShiftLeft(in=fout12S1,out=fout12S2);
-	ShiftLeft(in=fout12S2,out=fout12S3);
-	ShiftLeft(in=fout12S3,out=fout12S4);
-	ShiftLeft(in=fout12S4,out=fout12S5);
-	ShiftLeft(in=fout12S5,out=fout12S6);
-	ShiftLeft(in=fout12S6,out=fout12S7);
-	ShiftLeft(in=fout12S7,out=fout12S8);
-	ShiftLeft(in=fout12S8,out=fout12S9);
-	ShiftLeft(in=fout12S9,out=fout12S10);
-	ShiftLeft(in=fout12S10,out=fout12S11);
-	
-	Add16(a=t10,b=fout12S11,out=t11);
-	
-	Mux16(a[0..15]=false,b=a,sel=b[12],out=out13);
-	ShiftLeft(in=out13,out=fout13S1);
-	ShiftLeft(in=fout13S1,out=fout13S2);
-	ShiftLeft(in=fout13S2,out=fout13S3);
-	ShiftLeft(in=fout13S3,out=fout13S4);
-	ShiftLeft(in=fout13S4,out=fout13S5);
-	ShiftLeft(in=fout13S5,out=fout13S6);
-	ShiftLeft(in=fout13S6,out=fout13S7);
-	ShiftLeft(in=fout13S7,out=fout13S8);
-	ShiftLeft(in=fout13S8,out=fout13S9);
-	ShiftLeft(in=fout13S9,out=fout13S10);
-	ShiftLeft(in=fout13S10,out=fout13S11);
-	ShiftLeft(in=fout13S11,out=fout13S12);
-	
-	Add16(a=t11,b=fout13S12,out=t12);
-	
-	
-	Mux16(a[0..15]=false,b=a,sel=b[13],out=out14);
-	ShiftLeft(in=out14,out=fout14S1);
-	ShiftLeft(in=fout14S1,out=fout14S2);
-	ShiftLeft(in=fout14S2,out=fout14S3);
-	ShiftLeft(in=fout14S3,out=fout14S4);
-	ShiftLeft(in=fout14S4,out=fout14S5);
-	ShiftLeft(in=fout14S5,out=fout14S6);
-	ShiftLeft(in=fout14S6,out=fout14S7);
-	ShiftLeft(in=fout14S7,out=fout14S8);
-	ShiftLeft(in=fout14S8,out=fout14S9);
-	ShiftLeft(in=fout14S9,out=fout14S10);
-	ShiftLeft(in=fout14S10,out=fout14S11);
-	ShiftLeft(in=fout14S11,out=fout14S12);
-	ShiftLeft(in=fout14S12,out=fout14S13);
-	
-	Add16(a=t12,b=fout14S13,out=t13);
-	
-	Mux16(a[0..15]=false,b=a,sel=b[14],out=out15);
-	ShiftLeft(in=out15,out=fout15S1);
-	ShiftLeft(in=fout15S1,out=fout15S2);
-	ShiftLeft(in=fout15S2,out=fout15S3);
-	ShiftLeft(in=fout15S3,out=fout15S4);
-	ShiftLeft(in=fout15S4,out=fout15S5);
-	ShiftLeft(in=fout15S5,out=fout15S6);
-	ShiftLeft(in=fout15S6,out=fout15S7);
-	ShiftLeft(in=fout15S7,out=fout15S8);
-	ShiftLeft(in=fout15S8,out=fout15S9);
-	ShiftLeft(in=fout15S9,out=fout15S10);
-	ShiftLeft(in=fout15S10,out=fout15S11);
-	ShiftLeft(in=fout15S11,out=fout15S12);
-	ShiftLeft(in=fout15S12,out=fout15S13);
-	ShiftLeft(in=fout15S13,out=fout15S14);
-	
-	Add16(a=t13,b=fout15S14,out=t14);
-	
-	Mux16(a[0..15]=false,b=a,sel=b[15],out=out16);
-	ShiftLeft(in=out16,out=fout16S1);
-	ShiftLeft(in=fout16S1,out=fout16S2);
-	ShiftLeft(in=fout16S2,out=fout16S3);
-	ShiftLeft(in=fout16S3,out=fout16S4);
-	ShiftLeft(in=fout16S4,out=fout16S5);
-	ShiftLeft(in=fout16S5,out=fout16S6);
-	ShiftLeft(in=fout16S6,out=fout16S7);
-	ShiftLeft(in=fout16S7,out=fout16S8);
-	ShiftLeft(in=fout16S8,out=fout16S9);
-	ShiftLeft(in=fout16S9,out=fout16S10);
-	ShiftLeft(in=fout16S10,out=fout16S11);
-	ShiftLeft(in=fout16S11,out=fout16S12);
-	ShiftLeft(in=fout16S12,out=fout16S13);
-	ShiftLeft(in=fout16S13,out=fout16S14);
-	ShiftLeft(in=fout16S14,out=fout16S15);
-	
-	Add16(a=t14,b=fout16S15,out=out);
+	ShiftLeft(in=ShiftLeft14,out=ShiftLeft15);
+	Mux16(a[0..15]=false,b=ShiftLeft15,sel=b[15],out=out16);
+	Add16(a=t15,b=out16,out=out);
+
 	
 }
