@@ -1,0 +1,26 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 2 - An HDL File
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+README - This file.
+Add16.hdl - add two 16 bit numbers.
+ALU.hdl - arithmetic logic unit.
+FullAdder.hdl - add two bits with carry.
+HalfAdder.hdl - add two bits with no consideration to carry input. 
+Inc16.hdl - incremet number by 1.
+Mul.hdl - multiply two numbers.
+Or16Way.hdl - helper gate, preform or operation on 16 bits.
+ShiftLeft.hdl - shift binary number one cell to the left.
+ShiftRight.hdl - shift binary number one cell to the right.
+
+Remarks
+-------
+* added the Or16Way chip because it seemed to be more elegent.

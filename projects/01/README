@@ -1,0 +1,33 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 1 - An HDL File
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+README - This file.
+And.hdl - and chip.
+And16.hdl - 16 bit and chip.
+Or.hdl - or chip.
+Or16.hdl - 16 bit or chip.
+Or8Way.hdl - 8 bit or chip.
+Not.hdl - not chip.
+Not16.hdl - 16 bit not chip.
+Xor.hdl - xor chip.
+Mux.hdl - mux chip.
+Mux16.hdl - 16 bit mux chip.
+Mux4Way16.hdl - 16 bit 4 way mux chip.
+Mux8Way16.hdl - 16 bit 8 way mux chip.
+DMux.hdl - dmux chip.
+DMux16.hdl - 16 bit dmux chip.
+DMux4Way.hdl - 4 way dmux chip.
+DMux8Way.hdl - 8 way dmux chip.
+
+Remarks
+-------
+* cool cool cool!

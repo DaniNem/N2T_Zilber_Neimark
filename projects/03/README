@@ -1,0 +1,25 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 3 - An HDL File
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+README - This file.
+Bit.hdl - remember the state of input if neseccery
+Register.hdl - remember the state of 16 bit input if neseccery 
+RAM8.hdl - holds memory of 8 registers
+RAM64.hdl - holds memory of 64 registers
+RAM512.hdl - holds memory of 512 registers
+RAM4K.hdl - holds memory of 2^12 registers
+RAM16K.hdl - holds memory of 2^14 registers
+PC.hdl - counter chip.
+
+Remarks
+-------
+* cool cool cool!
