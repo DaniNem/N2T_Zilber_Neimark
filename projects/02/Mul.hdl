@@ -3,6 +3,7 @@ CHIP Mul{
     OUT out[16];
 
     PARTS:
+	//1
 	Mux16(a[0..15]=false,b=a,sel=b[0],out=out1);
 
 	ShiftLeft(in=a,out=ShiftLeft1);
