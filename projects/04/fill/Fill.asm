@@ -12,3 +12,57 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+	@temp
+	M = 0
+(START)
+	@KBD
+	D = M
+	@PRESS 
+	D ; JEQ
+	@temp
+	M = -1
+	@LOOPINIT
+	0;JMP
+(PRESS)
+	@temp
+	M = 0
+(LOOPINIT)
+	@8191  // initialize i to 8192
+	D = A
+	@i
+	M = D
+	
+	@SCREEN
+	D = A
+	@screenword
+	M = D
+	@8191  // initialize screenword to screen + 8192
+	D = A
+	@screenword
+	M = M + D
+	
+(LOOP)
+	@temp
+	D = M
+	@screenword
+	A = M 
+	M = D
+	
+	@screenword
+	M= M-1
+	
+	@i
+	M = M-1
+	D=M
+	@START
+	D;JLT
+	@LOOP
+	1;JMP
+	
+	
+	
+	
+	
+	
+	

@@ -15,7 +15,7 @@
 	M = 0
 	@LOOP
 	D; JGT
-	@R2
+	@R1
 	M = -M
 	@sign 
 	M = 1
