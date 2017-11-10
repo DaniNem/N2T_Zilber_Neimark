@@ -40,4 +40,23 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+	Not(in = instruction[15], out=notInst);
+	Or(a=instruction[5],b= notInst,out=RegOutLoad);
+	ARegister(in= MuxOut1 ,load=RegOutLoad,out= ARegOut,out[0..14] = addressM);
+	DRegister(in= out1,load=DRegOutLoad ,out=DRegOut ); 	
+	Mux16(a=instruction,b=out1,sel= instruction[15],out= MuxOut1 ); 
+	Mux16(a= ARegOut,b= inM,sel= instruction[12],out= MuxOut2) ;
+	ALU(x= DRegOut,y=MuxOut2,zx=instruction[11] ,nx= instruction[10],zy= instruction[9],ny= instruction[8],f= instruction[7],no= instruction[6],out=outM,out= out1,zr= zrout,ng=ngout );
+	PC(in= ARegOut,load= loadControl,inc= incControl,reset= reset ,out[0..14]=pc );
+	And(a=instruction[15],b=instruction[3],out=writeM);
+	And(a=instruction[15],b=instruction[4],out=DRegOutLoad);
+	Not(in = ngout, out= PreJGT);
+	And(a=PreJGT,b=JNE,out=JGT);
+	Or(a=JGT,b=zrout,out=JGE);
+	Not(in = zrout,out=JNE);
+	Or(a=zrout,b=ngout,out=JLE);
+	Mux8Way16(a[0..15]= false,b[0] = JGT,b[1..15]= false,c[0] = zrout,c[1..15]= false,d[0]=JGE,d[1..15]= false,e[0]=ngout,e[1..15]= false,f[0] = JNE,f[1..15]= false,g[0]=JLE,g[1..15]= false,h[0]=true,h[1..15]= false,sel=instruction[0..2] ,out[0]=prepcControl,out[1..15] = Junk ); 
+	And(a= prepcControl,b=instruction[15],out=pcControl);
+	DMux(in= true,sel=pcControl ,a= incControl,b= loadControl ); 
+	
 }

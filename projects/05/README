@@ -1,0 +1,22 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 5 - An HDL File
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+README - This file.
+Memory.hdl - The computer memory
+ExtendAlu.hdl - Alu with mul and shift
+CpuMul.hdl - Cpu with mul and shift
+CPU.hdl - Standart HACK cpu
+Computer.hdl - HACK computer
+
+Remarks
+-------
+* cool cool cool!
