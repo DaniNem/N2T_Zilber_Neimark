@@ -6,3 +6,5 @@ projects/06/Assembler/\.idea/
 projects/06/asmb/\.idea/
 
 tools/bin/
+
+*.xml
