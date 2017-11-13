@@ -23,7 +23,7 @@ if __name__ == "__main__":
     if os.path.isfile(sys.argv[1]):
         files.append(sys.argv[1])
     else:
-        files = [sys.argv[1]+"\\"+dir for dir in os.listdir(sys.argv[1]) if dir.endswith(".asm")]
+        files = [os.path.join(sys.argv[1],dir) for dir in os.listdir(sys.argv[1]) if dir.endswith(".asm")]
     for fileName in files:
         #print("!!!!!!")
         #print(os.path.splitext(fileName)[0])
