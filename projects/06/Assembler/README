@@ -1,0 +1,28 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 6
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+README - This file.
+Makefile - chmod commands
+Assembler - Run the program
+Assembler.py - the main
+AInstruction.py - A instructions class
+CCommandParser.py - C instructions class
+CommentHandler.py - comment class
+FileReader.py - file reader class
+FileSaver.py - file writer class
+JumpStatements.py - symbols class 
+VariableAllocator.py - variable class
+WhiteSpaceHandler.py - white spaces class
+
+Remarks
+-------
+* cool cool cool!
