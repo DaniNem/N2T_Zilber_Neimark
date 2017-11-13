@@ -1,7 +1,7 @@
 '''
 This class is responsible  for parsing C commands
 '''
-class CommentHandler(object):
+class CCommandParser(object):
 
     def __init__(self):
         self.EQUAL = "="
@@ -50,8 +50,4 @@ class CommentHandler(object):
                                self.dest[dest] + self.jump[jump]
 
 if __name__ == "__main__":
-    lst = ["D=D+1","D=0","@R1","D=A>>"]
-    cH = CommentHandler()
-    print(lst)
-    cH.run(lst)
-    print(lst)
+    pass
