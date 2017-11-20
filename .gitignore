@@ -14,3 +14,5 @@ projects/07/MemoryAccess/BasicTest/BasicTest - Copy\.tst
 projects/07/MemoryAccess/BasicTest/BasicTest\.out
 
 projects/07/VMtranslator/\.idea/VMtranslator\.iml
+
+*.pyc
