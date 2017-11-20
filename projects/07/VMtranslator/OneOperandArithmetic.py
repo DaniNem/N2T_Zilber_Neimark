@@ -20,7 +20,7 @@ class OneOperandArithmetic(object):
         :return: none
         """
         output_ds.append("@SP")
-        output_ds.append("@A=M")
+        output_ds.append("A=M")
         output_ds.append("A=A-1")
         output_ds.append("D=M")
-        output_ds.append("M =" + self.op + "M")
+        output_ds.append("M=" + self.op + "M")

@@ -11,3 +11,4 @@ class EqualOp(CO):
         initiate operation
         """
         self.jump_condition = "JNE"
+        self.OPERATION = "eq"

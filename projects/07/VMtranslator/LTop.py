@@ -1,7 +1,7 @@
 from ConditionsOp import ConditionsOp as CO
 
 
-class GTop(CO):
+class LTop(CO):
     """
     a parser that convert vm < command to assembly
     """
@@ -10,4 +10,5 @@ class GTop(CO):
         """
         initiate operation
         """
-        self.jump_condition = "JGT"
+        self.jump_condition = "JGE"
+        self.OPERATION = "lt"

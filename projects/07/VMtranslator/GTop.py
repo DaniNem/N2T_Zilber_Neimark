@@ -10,4 +10,5 @@ class GTop(CO):
         """
         initiate operation
         """
-        self.jump_condition = "JLT"
+        self.jump_condition = "JLE"
+        self.OPERATION = "gt"

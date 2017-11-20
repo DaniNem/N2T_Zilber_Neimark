@@ -1,7 +1,7 @@
 from PushPopParser import PushPopParser
 
 
-class TempParser(PushPopParser):
+class PointerParser(PushPopParser):
     '''
 
     '''
@@ -9,8 +9,7 @@ class TempParser(PushPopParser):
     def __init__(self):
         """
         """
-        self.map = ["R5","R6","R7","R8","R9","R10","R11","R12"]
-        self.ID = "temp"
+        self.ID = "pointer"
 
     def __parse_pop(self,num,output_ds):
         '''
@@ -19,11 +18,14 @@ class TempParser(PushPopParser):
         :return:
         '''
         # go to last stuck arg
+        path = "THAT"
+        if num == "0":
+            path = "THIS"
         output_ds.append("@SP")
         output_ds.append("A=M-1")
         # remember the value in D
         output_ds.append("D=M")
-        output_ds.append("@" + self.map[int(num)])
+        output_ds.append("@" + path)
         #update the memorey
         output_ds.append("M=D")
         #update the sp pos
@@ -38,7 +40,11 @@ class TempParser(PushPopParser):
         :param output_ds:
         :return:
         '''
-        output_ds.append("@" + self.map[int(num)])
+        path = "THAT"
+        if num == "0":
+            path = "THIS"
+
+        output_ds.append("@" + path)
         #Remember this value in D
         output_ds.append("D=M")
         #go to the stuck last pos
@@ -58,8 +64,4 @@ class TempParser(PushPopParser):
             self.__parse_push(t[2],output_ds)
 
 if __name__ == "__main__":
-    a = TempParser()
-    print(a.is_triggered("pop temp 5"))
-    b = []
-    a.parse("pop temp 7",b)
-    print(b)
+    pass

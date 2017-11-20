@@ -25,5 +25,6 @@ class BasicArithmeticOp(object):
         output_ds.append("D=M")
         output_ds.append("A=A-1")
         output_ds.append("M=M" + self.op + "D")
+        #output_ds.append("M=D" + self.op + "M")
         output_ds.append("@SP")
         output_ds.append("M=M-1")
