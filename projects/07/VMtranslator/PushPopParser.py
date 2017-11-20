@@ -58,7 +58,6 @@ class PushPopParser(object):
         output_ds.append("A=M")
         #update the stuck
         output_ds.append("M=D")
-        output_ds.append("M=D")
         #update the suck pointer
         output_ds.append("@SP")
         output_ds.append("M=M+1")

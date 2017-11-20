@@ -11,10 +11,7 @@ class ConstantParser(object):
         :param line: an vm line
         :return: true if this line refer to the constant memory
         """
-        line_arr = line.split(self.SPACE)
-        if line_arr[1] == self.CONST:
-            return True
-        return False
+        return self.CONST in line
 
     def parse(self, line, output_ds):
         """

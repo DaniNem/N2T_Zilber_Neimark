@@ -9,6 +9,9 @@ from StaticParser import StaticParser as sp
 from TempParser import TempParser as tp
 from ThisParser import ThisParser as Thisp
 from ThatParser import ThatParser as Thatp
+from Addition import Addition as add
+from Subtraction import Subtraction as sub
+from ConstantParser import ConstantParser as cp
 
 
 
@@ -22,7 +25,7 @@ if __name__ == "__main__":
     for fileName in files:  # go over the files and convert them to binary
         # form
         print(fileName)
-        parserLst = [ap(),lp(),sp(fileName),tp(),Thisp(),Thatp()]
+        parserLst = [cp(),ap(),lp(),sp(fileName),tp(),Thisp(),Thatp(),add(),sub()]
         file = fr(fileName)  # open file
         lines = file.get_file()  # get file's lines
         retVal = []

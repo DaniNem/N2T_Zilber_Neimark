@@ -13,17 +13,17 @@ class BasicArithmeticOp(object):
             return True
         return False
 
-    def parse(self, output_ds):
+    def parse(self, line,output_ds):
         """
         convert vm operation command to assembly code
         :param output_ds: assembly commands output
         :return: none
         """
         output_ds.append("@SP")
-        output_ds.append("@A=M")
+        output_ds.append("A=M")
         output_ds.append("A=A-1")
         output_ds.append("D=M")
         output_ds.append("A=A-1")
-        output_ds.append("M=D" + self.op + "M")
+        output_ds.append("M=M" + self.op + "D")
         output_ds.append("@SP")
         output_ds.append("M=M-1")
