@@ -8,3 +8,9 @@ projects/06/asmb/\.idea/
 tools/bin/
 
 *.xml
+
+projects/07/MemoryAccess/BasicTest/BasicTest - Copy\.tst
+
+projects/07/MemoryAccess/BasicTest/BasicTest\.out
+
+projects/07/VMtranslator/\.idea/VMtranslator\.iml

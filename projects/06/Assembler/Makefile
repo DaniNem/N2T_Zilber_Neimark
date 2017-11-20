@@ -24,4 +24,3 @@ all:
 	chmod a+x JumpStatements.py
 	chmod a+x VariableAllocator.py
 	chmod a+x WhiteSpaceHandler.py
-	
