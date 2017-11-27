@@ -1,0 +1,40 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 7
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+Addition.py - parse addition command
+BasicArithmeticOp.py - base class for arithmetic commands
+BinaryOr.py - binary or parser
+BinaryAnd.py - binary and parse
+CommentHandler.py - remove comments from input code
+ConditionOp.py - base class for condition command parser
+ConstantParse.py - parse constant memory segment code
+EqualOp.py - parse equal command
+FileReader.py - read text file
+FileSaver.py - write text file
+GTop.py - pasre x > y command
+LocalParse.py -  parse local memory segment code
+LTop.py - parse x < y command
+Negation.py - parse -x command
+Not.py - parse !x command
+OneOperandArithmetic.py - 
+PointerPaser.py -  parse pointer memory segment code
+PushPopParse.py - base class for memory segments parser
+StaticParser.py -  parse static memory segment code
+Subtraction.py - parse x - y command
+TempParser.py -  parse temp memory segment code
+ThatParser.py -  parse that memory segment code
+ThisParser.py -  parse this memory segment code
+VMtranslator.py - main class - translate given file/ directory to assembly
+
+Remarks
+-------
+* cool cool cool!
