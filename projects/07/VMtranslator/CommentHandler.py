@@ -18,12 +18,3 @@ class CommentHandler(object):
                 templst.append(line)
         lst.clear()
         lst.extend(templst)
-
-
-
-if __name__ == "__main__":
-    lst = ["D=D+1 //test", "//remove me", "@15", "@R1"]
-    cH = CommentHandler()
-    print(lst)
-    cH.run(lst)
-    print(lst)

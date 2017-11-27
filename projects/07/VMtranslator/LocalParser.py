@@ -1,17 +1,15 @@
 from PushPopParser import PushPopParser
-class LocalParser(PushPopParser):
 
+
+class LocalParser(PushPopParser):
+    """
+        convert a pop and pop operations of local memory from vm language
+        to assembly
+    """
 
     def __init__(self):
         """
+            set parameters
         """
         self.pos = "LCL"
         self.ID = "local"
-
-
-if __name__ == "__main__":
-    a = LocalParser()
-    print(a.is_triggered("pop argument 5"))
-    b = []
-    a.parse("pop argument 5",b)
-    print(b)
