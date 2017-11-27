@@ -25,7 +25,10 @@ from GotoParser import GotoParser as goto
 from LabelParser import LabelParser as label
 from IfGoTo import IfGoTo as ifgoto
 
-
+from BootStrap import BootStrap as bs
+from FunctionCallParser import FunctionCallParser as fcp
+from FunctionDecParser import FunctionDecParser as fdp
+from FunctionRetParser import FunctionRetParser as frp
 
 #the main
 if __name__ == "__main__":
@@ -33,7 +36,7 @@ if __name__ == "__main__":
     files = []
     #The results
     retVal = []
-    funcName = ''
+    bs(retVal)
     if os.path.isfile(sys.argv[1]):  # check if file or directory
         files.append(sys.argv[1])
         #determine the output name
@@ -45,12 +48,13 @@ if __name__ == "__main__":
         outPutName = os.path.join(sys.argv[1]
                                   , os.path.basename(sys.argv[1]).strip(
                 ".vm") + ".asm")
+
     for fileName in files:  # go over the files and convert them
         onlyFileName = os.path.basename(fileName).strip(".vm")
         #init every parser
         parserLst = [cp(),ap(),lp(),sp(),tp(),Thisp(),Thatp()
             ,add(),sub(),eq(),gt(),lt(),ba(),bo(),nt(),ng(),pp(),goto()
-            ,label(),ifgoto()] #
+            ,label(),ifgoto(),fcp(),fdp(),frp()] #
         file = fr(fileName)  # open file
         lines = file.get_file()  # get file's lines
         CommentHandler(lines)
@@ -60,7 +64,7 @@ if __name__ == "__main__":
             #TODO add return parser
             for parser in parserLst:
                 if parser.is_triggered(line):
-                    parser.set_params(onlyFileName,funcName)
+                    parser.set_params(onlyFileName)
                     parser.parse(line,retVal)
                     break
     saver = fs(outPutName, retVal)  # save

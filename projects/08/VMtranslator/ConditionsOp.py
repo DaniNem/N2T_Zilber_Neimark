@@ -13,7 +13,7 @@ class ConditionsOp(object):
             return True
         return False
 
-    def set_params(self,file_name,func_name):
+    def set_params(self,file_name):
         pass
     def parse(self, line, output_ds):
         """

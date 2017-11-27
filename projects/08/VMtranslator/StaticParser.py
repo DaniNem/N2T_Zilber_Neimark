@@ -14,7 +14,7 @@ class StaticParser(object):
         '''
         return self.ID in line
 
-    def set_params(self,file_name,func_name):
+    def set_params(self,file_name):
         self.fileName  = file_name
 
     def parse_pop(self,num,output_ds):

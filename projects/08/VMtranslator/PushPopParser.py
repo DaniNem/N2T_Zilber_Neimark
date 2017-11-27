@@ -8,7 +8,7 @@ class PushPopParser(object):
         :return: true if the line belongs to a certain memory segment
         """
         return self.ID in line
-    def set_params(self,file_name,func_name):
+    def set_params(self,file_name):
         pass
     def __parse_pop(self, num, output_ds):
         """
