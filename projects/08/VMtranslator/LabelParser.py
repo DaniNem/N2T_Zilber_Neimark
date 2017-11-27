@@ -1,10 +1,10 @@
-class GotoParser(object):
+class LabelParser(object):
     def __init__(self):
         """
         """
         self.file_name = ""
         self.function_name = ""
-        self.ID = "goto"
+        self.ID = "label"
 
     def is_triggered(self,line):
         '''
@@ -21,8 +21,7 @@ class GotoParser(object):
     def parse(self,line,output_ds):
         t = line.split(' ')
         label = self.file_name + "." + self.function_name +"$"+ t[1]
-        output_ds.append("@" + label)
-        output_ds.append(";JMP")
+        output_ds.append("(" + label + ")")
 
 if __name__ == "__main__":
     pass
