@@ -23,6 +23,7 @@ from CommentHandler import CommentHandler
 from PointerParser import PointerParser as pp
 from GotoParser import GotoParser as goto
 from LabelParser import LabelParser as label
+from IfGoTo import IfGoTo as ifgoto
 
 
 
@@ -48,7 +49,8 @@ if __name__ == "__main__":
         onlyFileName = os.path.basename(fileName).strip(".vm")
         #init every parser
         parserLst = [cp(),ap(),lp(),sp(),tp(),Thisp(),Thatp()
-            ,add(),sub(),eq(),gt(),lt(),ba(),bo(),nt(),ng(),pp(),goto(),label()] #
+            ,add(),sub(),eq(),gt(),lt(),ba(),bo(),nt(),ng(),pp(),goto()
+            ,label(),ifgoto()] #
         file = fr(fileName)  # open file
         lines = file.get_file()  # get file's lines
         CommentHandler(lines)
