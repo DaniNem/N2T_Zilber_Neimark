@@ -11,10 +11,3 @@ class Addition(BAO):
         """
         self.OPERATION = "add"
         self.op = "+"
-
-
-if __name__ == "__main__":
-    add = Addition()
-    ds = []
-    add.parse(ds)
-    print(ds)

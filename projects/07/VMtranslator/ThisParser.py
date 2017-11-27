@@ -1,17 +1,16 @@
 from PushPopParser import PushPopParser
-class ThisParser(PushPopParser):
 
+
+class ThisParser(PushPopParser):
+    """
+        convert a pop and pop operations of this memory from vm language
+        to assembly
+    """
 
     def __init__(self):
         """
+            set initial parameters
         """
         self.pos = "THIS"
         self.ID = "this"
 
-
-if __name__ == "__main__":
-    a = ThisParser()
-    print(a.is_triggered("pop argument 5"))
-    b = []
-    a.parse("pop argument 5",b)
-    print(b)

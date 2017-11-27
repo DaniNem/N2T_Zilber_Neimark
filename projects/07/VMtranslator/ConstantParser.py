@@ -28,11 +28,3 @@ class ConstantParser(object):
         output_ds.append("M=D")
         output_ds.append("@SP")
         output_ds.append("M=M+1")
-
-
-if __name__ == "__main__":
-    line1 = "push constant 10"
-    ds = []
-    const = ConstantParser()
-    const.parse(line1,ds)
-    print(ds)
