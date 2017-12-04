@@ -1,15 +1,21 @@
 class BootStrap(object):
-    def __init__(self,output_ds):
+    """
+        convert bootstrap command to assembly
+    """
+
+    def __init__(self, output_ds):
         """
+        convert to command
+        :param output_ds: ds of assembly commands
         """
-        output_ds.append("@256")
+        output_ds.append("@256")  # initial address of stack
         output_ds.append("D=A")
         output_ds.append("@SP")
         output_ds.append("M=D")
 
         function = "Sys.init"
         nArgs = "0"
-        retLabel = "retLabel" + str(len(output_ds))
+        retLabel = "retLabel" + str(len(output_ds))  # create label
         # pushing the retLabel
         output_ds.append("@" + retLabel)
         output_ds.append("D=A")
@@ -77,6 +83,3 @@ class BootStrap(object):
         output_ds.append("1;JMP")
 
         output_ds.append("(" + retLabel + ")")
-
-if __name__ == "__main__":
-    pass
