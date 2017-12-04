@@ -1,17 +1,13 @@
 from PushPopParser import PushPopParser
+
+
 class ArgumentParser(PushPopParser):
-
-
+    """
+        parse a constant push/pop command to assembly
+    """
     def __init__(self):
         """
+            initiate arguments
         """
         self.pos = "ARG"
         self.ID = "argument"
-
-
-if __name__ == "__main__":
-    a = ArgumentParser()
-    print(a.is_triggered("pop argument 5"))
-    b = []
-    a.parse("pop argument 5",b)
-    print(b)
