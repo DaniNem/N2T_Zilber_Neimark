@@ -58,5 +58,13 @@ method boolean atLimit()
 	return false;
 	
 }
+method Point getSPos()
+{
+	return Point.new(pos,y-h);
+}
+method Point getEPos()
+{
+	return Point.new(pos+w,y);
+}
 
 }
