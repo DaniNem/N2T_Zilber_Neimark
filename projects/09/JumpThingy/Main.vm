@@ -1,31 +1,65 @@
-function Main.main 3
-call Board.new 0
+function Main.main 6
+call Player.new 0
 pop local 0
+call Board.new 0
+pop local 3
 push constant 0
 not
-pop local 1
+pop local 4
 label WHILE_EXP0
-push local 1
+push local 4
 not
 if-goto WHILE_END0
-push local 0
-call Board.move 1
+push constant 10
+call Sys.wait 1
 pop temp 0
-push local 0
-call Board.handleEnemy 1
-pop temp 0
-push local 0
-call Board.printScore 1
-pop temp 0
-push local 0
-call Board.getScore 1
-pop local 2
-push local 2
-push constant 30000
-gt
+call Keyboard.keyPressed 0
+pop local 1
+push local 1
+push constant 131
+eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push constant 0
+not
+pop local 2
+label IF_FALSE0
+push local 1
+push constant 131
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop local 2
+label IF_FALSE1
+push local 0
+push local 2
+call Player.set_jump_state 2
+pop temp 0
+push local 0
+call Player.jump 1
+pop temp 0
+push local 3
+call Board.move 1
+pop temp 0
+push local 3
+call Board.handleEnemy 1
+pop temp 0
+push local 3
+call Board.printScore 1
+pop temp 0
+push local 3
+call Board.getScore 1
+pop local 5
+push local 5
+push constant 30000
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 call Screen.clearScreen 0
 pop temp 0
 push constant 12
@@ -55,8 +89,8 @@ call String.appendChar 2
 call Output.printString 1
 pop temp 0
 push constant 0
-pop local 1
-label IF_FALSE0
+pop local 4
+label IF_FALSE2
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0

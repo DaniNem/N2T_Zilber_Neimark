@@ -14,9 +14,9 @@ push constant 1
 pop this 7
 push constant 45
 pop this 8
-push constant 1
+push constant 2
 pop this 9
-push constant 5000
+push constant 2500
 pop this 10
 push constant 0
 pop this 11
@@ -26,7 +26,19 @@ pop this 0
 push constant 0
 push this 0
 add
-push constant 50
+push constant 100
+push this 6
+push constant 1
+sub
+call Enemy.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push this 0
+add
+push constant 300
 push this 6
 push constant 1
 sub

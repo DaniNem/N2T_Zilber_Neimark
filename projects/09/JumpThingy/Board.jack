@@ -23,13 +23,13 @@ constructor Board new()
 	let y1 = 253;
 	let speed = 1;
 	let maxSpeed = 45;
-	let numEnemis = 1;
-	let maxCounter = 5000;
+	let numEnemis = 2;
+	let maxCounter = 2500;
 	let curCounter = 0;
 	let enemy = Array.new(numEnemis);
 	
-	let enemy[0] = Enemy.new(50,y1 - 1);
-	//let enemy[1] = Enemy.new(150,y1 - 1);
+	let enemy[0] = Enemy.new(100,y1 - 1);
+	let enemy[1] = Enemy.new(300,y1 - 1);
 	
 	let i = numEnemis;
 	while (i>0)
@@ -75,8 +75,9 @@ method void move()
 	}
 	
 	return;
-	
 }
+
+method 
 method void printScore()
 {
 	var String s;
