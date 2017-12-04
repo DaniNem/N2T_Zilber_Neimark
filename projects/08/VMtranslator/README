@@ -11,21 +11,29 @@ Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
 Submitted Files
 ---------------
 Addition.py - parse addition command
+ArgumentParser - parse Argument segment code
 BasicArithmeticOp.py - base class for arithmetic commands
 BinaryOr.py - binary or parser
 BinaryAnd.py - binary and parse
+BootStrap - adding bootstrap
 CommentHandler.py - remove comments from input code
 ConditionOp.py - base class for condition command parser
 ConstantParse.py - parse constant memory segment code
 EqualOp.py - parse equal command
 FileReader.py - read text file
 FileSaver.py - write text file
+FunctionCallParser - Call to function parser
+FunctionDecParser - funtion decleration to function parser
+FunctionRetParser - function return parser`
+gotoParser - go to parser
 GTop.py - pasre x > y command
+IfGoTo - if go to parser
+LabelParser - label parser
 LocalParse.py -  parse local memory segment code
 LTop.py - parse x < y command
 Negation.py - parse -x command
 Not.py - parse !x command
-OneOperandArithmetic.py - 
+OneOperandArithmetic.py -  parser one arithmetic Operand
 PointerPaser.py -  parse pointer memory segment code
 PushPopParse.py - base class for memory segments parser
 StaticParser.py -  parse static memory segment code
