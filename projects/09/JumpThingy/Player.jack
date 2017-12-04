@@ -37,13 +37,17 @@ class Player {
 
 	method boolean check_intersection(Array points,int amount){
 		var int i;
+		var Point p;
 		var boolean check;
 		let i = 0;
 		while(i < amount){
-			let check =  has_intersect(points[i]);
+			let p = points[i];
+			do Output.println(); 
+			let check =  has_intersect(p);
 			if(check){
 				return true;
 			}
+			let i = i + 1;
 
 		}
 		return false;
@@ -54,17 +58,16 @@ class Player {
 		var int up_y;
 		var int right_x;
 		var int down_y;
-		var int x;
-		var int y;
+		//var int x;
+		//var int y;
 		let left_x = 32;
 		let right_x = left_x + 26;
 		let up_y = (pos_y / 32) - 5;
 		let down_y = up_y + 26;
-		let x = p.get_x();
-		let y = p.get_y();
-
-		if((x > left_x) & (x < right_x)){
-			if((y < down_y) & (y > up_y)){
+		//let x = p.get_x();
+		//let y = p.get_y();
+		if((p.get_x() > left_x) & (p.get_x() < right_x)){
+			if((p.get_y() < down_y) & (p.get_y() > up_y)){
 				return true;
 			}
 		}

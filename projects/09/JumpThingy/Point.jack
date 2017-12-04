@@ -5,6 +5,7 @@ class Point{
 	constructor Point new(int x, int y){
 		let x_pos = x;
 		let y_pos = y;
+		return this;
 	}
 
 	method int get_x(){

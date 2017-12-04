@@ -114,3 +114,21 @@ return
 label IF_FALSE0
 push constant 0
 return
+function Enemy.getSPos 0
+push argument 0
+pop pointer 0
+push this 0
+push static 0
+push static 2
+sub
+call Point.new 2
+return
+function Enemy.getEPos 0
+push argument 0
+pop pointer 0
+push this 0
+push static 1
+add
+push static 0
+call Point.new 2
+return

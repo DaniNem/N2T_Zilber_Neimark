@@ -5,12 +5,16 @@ class Main {
  	var Player mario;
 	var int key;
 	var boolean is_pressed;
+	var boolean loose;
+	var Array a;
+	var int size;
 	 var Board b;
 	 var boolean run;
 	 var int score;
 	 let mario = Player.new();
 	 let b = Board.new();
 	 let run = true;
+	 let loose = false;
 	 while (run)
 	 {
 	 
@@ -33,6 +37,16 @@ class Main {
 			do Screen.clearScreen();
 			do Output.moveCursor(12,12);
 			do Output.printString("You Win!!");
+			let run = false;
+		}
+		let size = b.getNumberOfEnemies() * 2;
+		let a = b.getEnemyPos();
+		let loose = mario.check_intersection(a,size);
+		if (loose)
+		{
+			do Screen.clearScreen();
+			do Output.moveCursor(12,12);
+			do Output.printString("You are a looser!!");
 			let run = false;
 		}
 	 }

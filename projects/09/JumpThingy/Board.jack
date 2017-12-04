@@ -85,19 +85,23 @@ method int getNumberOfEnemies()
 method Array getEnemyPos()
 {
 	var Array retVal;
-	let retVal = Array.new(2*numEnemis)
 	var int i;
+	var int j;
 	var Enemy e;
+	let retVal = Array.new(2*numEnemis);
 	
-	let i = 2*numEnemis;
-	while (i>0)
+	
+	let i = 0;
+	let j = 0;
+	while (~(i=numEnemis))
 	{
-		let e = enemy[i - 1];
-		let retVal[i] = e.getSPos();
-		let retVal[i-1] = e.getEPos();
-		let i=i-2;
+		let e = enemy[i];
+		let retVal[j] = e.getSPos();
+		let retVal[j+1] = e.getEPos();
+		let i=i+1;
+		let j=j+2;
 	}
-	return numEnemis;
+	return retVal;
 }
 method void printScore()
 {

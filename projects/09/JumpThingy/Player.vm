@@ -49,6 +49,45 @@ pop this 0
 label IF_FALSE0
 push constant 0
 return
+function Player.check_intersection 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push argument 2
+lt
+not
+if-goto WHILE_END0
+push local 0
+push argument 1
+add
+pop pointer 1
+push that 0
+pop local 1
+call Output.println 0
+pop temp 0
+push pointer 0
+push local 1
+call Player.has_intersect 2
+pop local 2
+push local 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+return
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
 function Player.has_intersect 4
 push argument 0
 pop pointer 0
@@ -69,19 +108,23 @@ push constant 26
 add
 pop local 3
 push argument 1
+call Point.get_x 1
 push local 0
 gt
 push argument 1
+call Point.get_x 1
 push local 2
 lt
 and
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push argument 2
+push argument 1
+call Point.get_y 1
 push local 3
 lt
-push argument 2
+push argument 1
+call Point.get_y 1
 push local 1
 gt
 and

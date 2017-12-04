@@ -150,6 +150,68 @@ label IF_FALSE1
 label IF_FALSE0
 push constant 0
 return
+function Board.getNumberOfEnemies 0
+push argument 0
+pop pointer 0
+push this 9
+return
+function Board.getEnemyPos 4
+push argument 0
+pop pointer 0
+push constant 2
+push this 9
+call Math.multiply 2
+call Array.new 1
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 1
+push this 9
+eq
+not
+not
+if-goto WHILE_END0
+push local 1
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 2
+push local 0
+add
+push local 3
+call Enemy.getSPos 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push constant 1
+add
+push local 0
+add
+push local 3
+call Enemy.getEPos 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+pop local 1
+push local 2
+push constant 2
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+return
 function Board.printScore 1
 push argument 0
 pop pointer 0
