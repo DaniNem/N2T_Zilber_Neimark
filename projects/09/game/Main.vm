@@ -1,0 +1,59 @@
+function Main.main 7
+call Player.new 0
+pop local 0
+label WHILE_EXP0
+push constant 0
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 1
+push local 1
+push constant 131
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 2
+label IF_FALSE0
+push local 1
+push constant 131
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop local 2
+label IF_FALSE1
+push local 0
+push local 2
+call Player.set_jump_state 2
+pop temp 0
+push local 0
+call Player.jump 1
+pop temp 0
+push constant 384
+push constant 158
+push constant 400
+push constant 170
+call Screen.drawRectangle 4
+pop temp 0
+push local 0
+push constant 384
+push constant 158
+call Player.has_intersect 3
+pop local 3
+push constant 0
+push constant 0
+call Output.moveCursor 2
+pop temp 0
+push local 3
+call Output.printInt 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

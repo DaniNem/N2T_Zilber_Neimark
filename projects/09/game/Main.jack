@@ -1,0 +1,28 @@
+class Main {
+	function void main(){
+	var Player mario;
+	var int key;
+	var boolean is_pressed;
+	var boolean i;
+	var int x;
+	var int y;
+	var int pos;
+	let mario = Player.new();
+	while(true){
+	let key = Keyboard.keyPressed();
+	if(key = 131){
+		let is_pressed = true;
+	}
+	if (~(key=131)){
+		let is_pressed = false;
+	}
+	do mario.set_jump_state(is_pressed);
+	do mario.jump();
+	do Screen.drawRectangle(384,158,400,170);
+	let i = mario.has_intersect(384,158);
+	do Output.moveCursor(0,0);
+	do Output.printInt(i);
+	}
+	return;
+}
+}
