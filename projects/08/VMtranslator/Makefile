@@ -21,8 +21,10 @@ all:
 	chmod a+x BasicArithmeticOp.py 
 	chmod a+x BinaryAnd.py 
 	chmod a+x BinaryOr.py 
+	chmod a+x BootStrap.py 
 	chmod a+x CommentHandler.py 
 	chmod a+x ConditionsOp.py 
+	chmod a+x ConstantParser.py 
 	chmod a+x EqualOp.py 
 	chmod a+x FileReader.py 
 	chmod a+x FileSaver.py 
@@ -39,3 +41,9 @@ all:
 	chmod a+x TempParser.py 
 	chmod a+x ThatParser.py 
 	chmod a+x ThisParser.py 
+	chmod a+x FunctionCallParser.py 
+	chmod a+x FunctionDecParser.py 
+	chmod a+x FunctionRetParser.py 
+	chmod a+x GotoParser.py 
+	chmod a+x IfGoTo.py 
+	chmod a+x LabelParser.py 

@@ -1,0 +1,116 @@
+function Enemy.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push constant 30
+pop static 1
+push constant 10
+pop static 2
+push argument 1
+pop static 0
+push argument 0
+pop this 0
+push pointer 0
+return
+function Enemy.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push static 0
+push static 2
+sub
+push this 0
+push static 1
+add
+push static 0
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Enemy.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push static 0
+push static 2
+sub
+push this 0
+push static 1
+add
+push static 0
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Enemy.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Enemy.move 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Enemy.erase 1
+pop temp 0
+push this 0
+push argument 1
+sub
+pop this 0
+push this 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 0
+label IF_FALSE0
+push pointer 0
+call Enemy.draw 1
+pop temp 0
+push constant 0
+return
+function Enemy.setPos 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Enemy.erase 1
+pop temp 0
+push argument 1
+pop this 0
+push pointer 0
+call Enemy.draw 1
+pop temp 0
+push constant 0
+return
+function Enemy.getW 0
+push argument 0
+pop pointer 0
+push static 1
+return
+function Enemy.atLimit 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+return
+label IF_FALSE0
+push constant 0
+return

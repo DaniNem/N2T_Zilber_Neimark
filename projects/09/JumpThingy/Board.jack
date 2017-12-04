@@ -1,0 +1,117 @@
+class Board{
+field Array enemy;
+field Enemy enemy1;
+field Enemy enemy2;
+field int x0;
+field int x1;
+field int y0;
+field int y1;
+field int speed;
+field int maxSpeed;
+field int numEnemis;
+field int maxCounter;
+field int curCounter;
+field int score;
+constructor Board new()
+{
+	var Enemy e;
+	var int i;
+	
+	let x0 = 0;  
+	let x1 = 511;  
+	let y0 = 253;  
+	let y1 = 253;
+	let speed = 1;
+	let maxSpeed = 45;
+	let numEnemis = 1;
+	let maxCounter = 5000;
+	let curCounter = 0;
+	let enemy = Array.new(numEnemis);
+	
+	let enemy[0] = Enemy.new(50,y1 - 1);
+	//let enemy[1] = Enemy.new(150,y1 - 1);
+	
+	let i = numEnemis;
+	while (i>0)
+	{
+		let e = enemy[i - 1];
+		do e.draw();
+		let i=i-1;
+	}
+	//the ground
+	do Screen.drawLine(x0,y0,x1,y1);
+	return this;
+}
+method void dispose()
+{
+	do Memory.deAlloc(this);
+	return;
+}
+method int getScore()
+{
+	return score;
+}
+method void move()
+{
+	var int i;
+	var Enemy e;
+	
+	let i = numEnemis;
+	while (i>0)
+	{
+		let e = enemy[i - 1];
+		do e.move(speed);
+		let i=i-1;
+	}
+	let curCounter = curCounter + 1;
+	if (curCounter = maxCounter)
+	{
+		let curCounter = 0;
+		let speed = speed + 1;
+		if (speed>maxSpeed)
+		{
+			let speed = maxSpeed;
+		}
+	}
+	
+	return;
+	
+}
+method void printScore()
+{
+	var String s;
+	let s = "Your score:";
+	let score = score + speed;
+	do Output.moveCursor(0,0);
+	do Output.printString(s);
+	do Output.printInt(score);
+	do s.dispose();
+	return;
+}
+method void handleEnemy()
+{
+	var int i;
+	var Enemy e;
+	var boolean flag;
+	let i = numEnemis;
+	while (i>0)
+		{
+			let e = enemy[i - 1];
+			let flag = e.atLimit();
+			//do Output.printInt(flag); 
+			//do Output.println(); 
+			if (flag)
+			{
+				
+			  do e.setPos(511-e.getW());
+			}
+			let i=i-1;
+		}
+	
+	
+	
+	return;
+		
+}
+
+}

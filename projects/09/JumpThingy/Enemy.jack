@@ -1,0 +1,62 @@
+class Enemy{
+field int pos;
+static int y;
+static int w;
+static int h;
+constructor Enemy new(int initX,int initY)
+{
+	let w = 30; //10 pixles  
+	let h = 10; //10 pixles  
+	let y = initY;
+	let pos = initX;
+	return this;
+}
+method void draw(){
+	do Screen.setColor(true);
+
+	do Screen.drawRectangle(pos,y-h,pos+w,y);
+	return;
+	}
+method void erase(){
+	do Screen.setColor(false);
+	do Screen.drawRectangle(pos,y-h,pos+w,y);
+	return;
+}
+method void dispose()
+{
+	do Memory.deAlloc(this);
+	return;
+}
+method void move(int speed)
+{	
+	do erase();
+	let pos = pos - speed;
+	if (pos < 0)
+	{
+		let pos = 0;
+	}
+	do draw();
+	return;
+}
+method void setPos(int nPos)
+{	
+	do erase();
+	let pos = nPos;
+	do draw();
+	return;
+}
+method int getW()
+{	
+	return w;
+}
+method boolean atLimit()
+{
+	if (pos = 0)
+	{
+	return true;
+	}
+	return false;
+	
+}
+
+}

@@ -1,7 +1,7 @@
 class IfGoTo(object):
-	'''
-	if go to parser
-	'''
+    '''
+    if go to parser
+    '''
 
     IF_GOTO = "if-goto"
 
@@ -9,11 +9,11 @@ class IfGoTo(object):
         self.file_name = file_name
 
     def parse(self, line, output_ds):
-	'''
-	:param line:current line
-	:param output_ds: output list
-	logic for translate the line
-	'''
+        '''
+        :param line:current line
+        :param output_ds:output list
+        :return:
+        '''
         line_arr = line.split(" ")
         label = line_arr[1]
         output_ds.append("@SP")

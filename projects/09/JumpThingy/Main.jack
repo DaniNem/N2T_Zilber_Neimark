@@ -1,0 +1,28 @@
+/** Computes the average of a sequence of integers */
+class Main {
+ function void main()
+ {
+	 var Board b;
+	 var boolean run;
+	 var int score;
+	 let b = Board.new();
+	 let run = true;
+	 while (run)
+	 {
+		//do Sys.wait(10);
+		do b.move();
+		do b.handleEnemy();
+		do b.printScore();
+		let score = b.getScore();
+		if (score > 30000)//30000
+		{
+			do Screen.clearScreen();
+			do Output.moveCursor(12,12);
+			do Output.printString("You Win!!");
+			let run = false;
+		}
+	 }
+	 
+	 return;
+ }
+} 
