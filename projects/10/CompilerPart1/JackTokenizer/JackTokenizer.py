@@ -8,7 +8,7 @@ class JackTokenizer(object):
                 ftokens.extend(line.split(' '))
         f = False
         nextInter = []
-        symbols = ['{' , '}' ,'.','(' , ')' , '[' , ']' , ',' , ';' , '+' , '-' , '*' , '/' , '&' , ',' , '<' , '>' , '=' , '~','\n','\t']
+        symbols = ['{' , '}' ,'.','(' , ')' , '[' , ']' , ',' , ';' , '+' , '-' , '*' , '/' , '&' , '<' , '>' , '=' , '~','\n','\t']
         for token in ftokens:
             #remove comments
             if (token == ' ' or token == '' or token == '\n'):
