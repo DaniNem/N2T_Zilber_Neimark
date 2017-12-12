@@ -47,6 +47,7 @@ class Player {
 			if(check){
 				return true;
 			}
+			do p.dispose();
 			let i = i + 1;
 
 		}

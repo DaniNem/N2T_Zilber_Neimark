@@ -49,6 +49,7 @@ class Main {
 			do Output.printString("You are a looser!!");
 			let run = false;
 		}
+		do a.dispose();
 	 }
 	 
 	 return;

@@ -80,6 +80,9 @@ push constant 0
 not
 return
 label IF_FALSE0
+push local 1
+call Point.dispose 1
+pop temp 0
 push local 0
 push constant 1
 add
