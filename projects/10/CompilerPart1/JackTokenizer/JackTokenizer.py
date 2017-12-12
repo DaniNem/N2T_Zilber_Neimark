@@ -8,7 +8,7 @@ class JackTokenizer(object):
                 ftokens.extend(line.split(' '))
         f = False
         nextInter = []
-        symbols = ['{' , '}' ,'.','(' , ')' , '[' , ']' , ',' , ';' , '+' , '-' , '*' , '/' , '&' , ',' , '<' , '>' , '=' , '~','\n']
+        symbols = ['{' , '}' ,'.','(' , ')' , '[' , ']' , ',' , ';' , '+' , '-' , '*' , '/' , '&' , ',' , '<' , '>' , '=' , '~','\n','\t']
         for token in ftokens:
             #remove comments
             if (token == ' ' or token == '' or token == '\n'):
@@ -44,7 +44,7 @@ class JackTokenizer(object):
                 nextIter1.append(t)
 
         for i in nextIter1:
-            if (i != '' and i != '\n'):
+            if (i != '' and i != '\n'  and i != '\t'):
                 self.data.append(i)
 
     def hasNext(self):
@@ -57,8 +57,9 @@ class JackTokenizer(object):
         return self.data[self.currentIndex];
 
 if __name__ == '__main__':
-    file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
+    file = r'C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.jack'
     test = JackTokenizer(file)
     print(test.get_token())
     test.next()
     print(test.get_token())
+    print(test.data)
