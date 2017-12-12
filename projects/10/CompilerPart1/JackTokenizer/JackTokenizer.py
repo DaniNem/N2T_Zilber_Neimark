@@ -40,6 +40,7 @@ class JackTokenizer(object):
                     nextIter1.append(t[i:n])
                     nextIter1.append(t[n:n+1])
                     i = n+1
+                nextIter1.append(t[i:])
             else:
                 nextIter1.append(t)
 
@@ -57,6 +58,7 @@ class JackTokenizer(object):
         return self.data[self.currentIndex];
 
 if __name__ == '__main__':
+    #file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
     file = r'C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.jack'
     test = JackTokenizer(file)
     print(test.get_token())
