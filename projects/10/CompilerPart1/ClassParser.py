@@ -27,11 +27,9 @@ class ClassParser(object):
         self._tokens.next()
 
         c = self.run_class_var_dec(self._tokens, self._lexical)
-        if c:
-            self._lexical.closeSub()
-        c = self.run_subroutine_dec(self._tokens, self._lexical)
-        if c:
-            self._lexical.closeSub()
+        # if c:
+        #     self._lexical.closeSub()
+        self.run_subroutine_dec(self._tokens, self._lexical)
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
 
@@ -42,11 +40,11 @@ class ClassParser(object):
         :param lexical_writer: writer of xml
         :return: null
         """
-        if text_tokens.get_token() != "static" and text_tokens.get_token() != \
-                "field":
-            return False
-        else:
-            self._lexical.openSub("classVarDec")
+        # if text_tokens.get_token() != "static" and text_tokens.get_token() != \
+        #         "field":
+        #     return False
+        # else:
+        #     self._lexical.openSub("classVarDec")
         while self.run_var_dec_line(text_tokens, lexical_writer):
             continue
         return True
@@ -61,19 +59,22 @@ class ClassParser(object):
         if text_tokens.get_token() != "static" and text_tokens.get_token() != \
                 "field":
             return False
+        self._lexical.openSub("classVarDec")
         lexical_writer.write(text_tokens.get_token(), self.FIELD_STATIC)
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token())
         text_tokens.next()
-
+        a = text_tokens.get_token()
         while True:
             lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
             text_tokens.next()
             if text_tokens.get_token() != ",":
                 break
-
+            lexical_writer.write(text_tokens.get_token(), "symbol")
+            text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")
         text_tokens.next()
+        self._lexical.closeSub()
         return True
 
     def run_subroutine_dec(self, text_tokens, lexical_writer):
@@ -83,14 +84,10 @@ class ClassParser(object):
         :param lexical_writer: xml writer
         :return: null
         """
-        name = text_tokens.get_token()
-        if name != "constructor" and name != "function" and name != "method":
-            return False
-        else:
-            self._lexical.openSub("subroutineDec")
         while self.run_subroutine_dec_line(text_tokens, lexical_writer):
             continue
         return True
+
     def run_subroutine_dec_line(self, text_tokens, lexical_writer):
         """
         go over a specific method deceleration and parse to xml
@@ -101,6 +98,7 @@ class ClassParser(object):
         name = text_tokens.get_token()
         if name != "constructor" and name != "function" and name != "method":
             return False
+        self._lexical.openSub("subroutineDec")
         lexical_writer.write(name, "keyword")
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token())
@@ -112,11 +110,12 @@ class ClassParser(object):
         lexical_writer.openSub("parameterList")
         self.run_param_list(text_tokens, lexical_writer)
         lexical_writer.closeSub()
-        lexical_writer.openSub("subroutineBody")
         lexical_writer.write(text_tokens.get_token(), self.CLOSE_BRACKET)
-        lexical_writer.closeSub()
         text_tokens.next()
+        lexical_writer.openSub("subroutineBody")
         self.run_subroutine_body(text_tokens, lexical_writer)
+        lexical_writer.closeSub()
+        lexical_writer.closeSub()
         return True
 
     def run_param_list(self, text_tokens, lexical_writer):
@@ -143,9 +142,7 @@ class ClassParser(object):
         text_tokens.next()
         while self.run_var_dec(text_tokens, lexical_writer):
             continue
-        lexical_writer.openSub("statements")
         self.statements.run(text_tokens, lexical_writer)
-        lexical_writer.closeSub()
         lexical_writer.write(text_tokens.get_token(), "symbol")
         text_tokens.next()
         return
@@ -180,7 +177,7 @@ class ClassParser(object):
 
 if __name__ == "__main__":
     writer = LexicalWriter()
-    tokenizer = JT(r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\main.jack")
+    tokenizer = JT(r"C:\nand2tetris\projects\10\Square\Square.jack")
     a = ClassParser(tokenizer, writer)
     a.run()
-    writer.writeXML(r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\ma_man.xml")
+    writer.writeXML(r"C:\nand2tetris\projects\10\Square\ma_man.xml")

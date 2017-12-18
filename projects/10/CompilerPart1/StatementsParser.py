@@ -16,6 +16,12 @@ class StatementsParser(object):
 
     def run(self, text_tokens, lexical_writer):
         more_statements = True
+        sub_flag = False
+        term = text_tokens.get_token()
+        if term == "do" or term == "if" or term == "let" or term == "while" or \
+                        term == "return":
+            lexical_writer.openSub("statements")
+            sub_flag = True
         while more_statements:
             a = self.run_do(text_tokens, lexical_writer)
             b = self.run_if(text_tokens, lexical_writer)
@@ -23,6 +29,8 @@ class StatementsParser(object):
             d = self.run_return(text_tokens, lexical_writer)
             e = self.run_while(text_tokens, lexical_writer)
             more_statements = a or b or c or d or e
+        if sub_flag:
+            lexical_writer.closeSub()
         return True
 
     def run_do(self, text_tokens, lexical_writer):
@@ -36,7 +44,9 @@ class StatementsParser(object):
             return False
         lexical_writer.openSub("doStatement")
         lexical_writer.write(text_tokens.get_token(), self.DO)  # parse do statement
+        a = text_tokens.get_token()
         text_tokens.next()
+        b = text_tokens.get_token()
         self.expression_parser.run_subroutine_call(text_tokens, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
         text_tokens.next()
@@ -55,25 +65,28 @@ class StatementsParser(object):
         lexical_writer.openSub("ifStatement")
         lexical_writer.write(text_tokens.get_token(), self.IF)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token, "symbol")  # opening brackets
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # opening brackets
         text_tokens.next()
         self.expression_parser.run(text_tokens, lexical_writer)  # parse expression
         # in brackets
-        lexical_writer.write(text_tokens.get_token, "symbol")  # closing brackets
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token, "symbol")  # opening brackets
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # opening brackets
         text_tokens.next()
         self.run(text_tokens, lexical_writer)  # parse statements
         # in if body
-        lexical_writer.write(text_tokens.get_token, "symbol")  # closing brackets
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
         if text_tokens.get_token() != "else":
+            lexical_writer.closeSub()
             return True
-        lexical_writer.write(text_tokens.get_token, "symbol")  # opening brackets
+        lexical_writer.write(text_tokens.get_token(), "keyword")  # opening brackets
+        text_tokens.next()
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
         self.run(text_tokens, lexical_writer)  # parse statements
         # in else body
-        lexical_writer.write(text_tokens.get_token, "symbol")  # closing brackets
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
         lexical_writer.closeSub()
         return True

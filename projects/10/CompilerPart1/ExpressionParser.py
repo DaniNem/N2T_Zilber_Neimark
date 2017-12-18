@@ -28,7 +28,7 @@ class ExpressionParser(object):
             text_tokens.next()
             lexical_writer.openSub("term")
             self.run_term(text_tokens, lexical_writer)  # parse next term
-            lexical_writer.closeSup()
+            lexical_writer.closeSub()
         lexical_writer.closeSub()
         return True
 
@@ -50,7 +50,8 @@ class ExpressionParser(object):
             return True
 
         elif term.startswith("\""):  # check if string
-            lexical_writer.write(term, "StringConstant")
+            term = term[1:len(term) - 1]
+            lexical_writer.write(term, "stringConstant")
             text_tokens.next()
             return True
 
@@ -62,14 +63,16 @@ class ExpressionParser(object):
         elif term in self.unary_ops:  # check if unary operand
             lexical_writer.write(term, "symbol")
             text_tokens.next()
-            self.run(text_tokens, lexical_writer)
+            lexical_writer.openSub("term")
+            self.run_term(text_tokens, lexical_writer)
+            lexical_writer.closeSub()
             return True
 
         elif term.startswith("("):  # check if an expression
             lexical_writer.write(term, "symbol")
             text_tokens.next()
             self.run(text_tokens, lexical_writer)
-            lexical_writer.write(term, "symbol")
+            lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
             return True
 
@@ -83,7 +86,8 @@ class ExpressionParser(object):
             lexical_writer.write(next_token, "symbol")  # opening bracket
             text_tokens.next()
             self.run(text_tokens, lexical_writer)
-            lexical_writer.write(next_token, "symbol")  # closing bracket
+            lexical_writer.write(text_tokens.get_token(), "symbol")  # closing
+            # bracket
             text_tokens.next()
             return True
 
@@ -110,11 +114,10 @@ class ExpressionParser(object):
         text_tokens.next()
         if next_token == "(":
             self.run_expression_list(text_tokens, lexical_writer)
-            lexical_writer.write(next_token, "symbol")
+            lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
             return True
         lexical_writer.write(text_tokens.get_token(), "identifier")  # write
-        what = text_tokens.get_token()
         # subroutine name
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
@@ -122,6 +125,7 @@ class ExpressionParser(object):
         self.run_expression_list(text_tokens, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
+        return True
 
     def run_expression_list(self, text_tokens, lexical_writer):
         """
@@ -130,10 +134,15 @@ class ExpressionParser(object):
         :param lexical_writer: xml writer
         :return: true if the given line is indeed an expression list
         """
+        lexical_writer.openSub("expressionList")
         if text_tokens.get_token() == ")":
+            lexical_writer.closeSub()
             return True
+        a = text_tokens.get_token()
         self.run(text_tokens, lexical_writer)
         while text_tokens.get_token() == ",":
-            self.run(text_tokens, lexical_writer)
+            lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
+            self.run(text_tokens, lexical_writer)
+        lexical_writer.closeSub()
         return True
