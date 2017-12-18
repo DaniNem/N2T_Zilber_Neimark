@@ -24,16 +24,27 @@ class LexicalWriter(object):
         self.subElements.append(ET.SubElement(self.subElements
                                               [len(self.subElements)-1],name))
     def closeSub(self):
-        self.subElements.pop()
+
+        t = self.subElements.pop()
+        # patch to support the bug in the origin
+        if (not len(list(t))):
+            t.append(ET.Element(""))
+
 
     def writeXML(self, path):
         tree = ET.ElementTree(self.root)
         self.__indent(self.root)
-        #reparsed = minidom.parseString(ET.tostring(self.root))
-        #print(reparsed.toprettyxml())
-        #with open(path,'w') as f:
-        #    f.write(reparsed.toprettyxml())
-        tree.write(path)
+        a = ET.tostring(self.root, short_empty_elements=False).decode("utf-8")
+        #patch to support the bug in the origin
+        while (a.find('<></>') != -1):
+            idx = a.find('<></>');
+            first = a.rfind(">",0,idx)+1
+            last = a.find("/>",idx)+2
+            a = a.replace(a[first:last],'')
+
+        with open(path,'w') as f:
+            f.write(a)
+
 
     '''
     copy and paste from http://effbot.org/zone/element-lib.htm#prettyprint
@@ -42,6 +53,7 @@ class LexicalWriter(object):
     '''
 
     def __indent(self,elem, level=0):
+        z = elem.tag
         i = "\n" + level * "  "
         if len(elem):
             if not elem.text or not elem.text.strip():
