@@ -23,7 +23,8 @@ class JackTokenizer(object):
                             ftokens.extend(line[:idx].split(' '))
                 else:
                     ftokens.extend(line.split(' '))
-        f = False
+        f1 = False
+        f2 = False
         nextInter = []
         symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*',
                    '&', '<', '>', '=', '~', '\n', '\t']
@@ -32,18 +33,18 @@ class JackTokenizer(object):
             if (token == ' ' or token == '' or token == '\n'):
                 continue
             if (token.startswith('/*')):
-                f = True
+                f1 = True
                 continue
             if (token.startswith('*/')):
-                f = False
+                f1 = False
                 continue
             if (token == r'//'):
-                f = True
+                f2 = True
                 continue
-            if (f and '\n' in token):
-                f = False
+            if (f2 and '\n' in token):
+                f2 = False
                 continue
-            if (not f):
+            if (not f1 and not f2):
                 nextInter.append(token)
         nextIter1 = []
         for t in nextInter:
@@ -82,7 +83,7 @@ class JackTokenizer(object):
 
 if __name__ == '__main__':
     # file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\main.jack"
+    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\Square\SquareGame.jack"
     test = JackTokenizer(file)
     print(test.get_token())
     test.next()
