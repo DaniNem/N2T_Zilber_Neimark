@@ -34,7 +34,7 @@ class ClassVarDec(object):
             return False
         lexical_writer.write(text_tokens.get_token(), self.FIELD_STATIC)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(),"fuck")
+        lexical_writer.write(text_tokens.get_token())
         text_tokens.next()
 
         while True:

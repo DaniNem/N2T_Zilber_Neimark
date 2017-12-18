@@ -21,7 +21,7 @@ class ParameterListParser(object):
         while True:
             if text_tokens.get_token() == ")":
                 return
-            lexical_writer.write(text_tokens.get_token(),"fuck")
+            lexical_writer.write(text_tokens.get_token())
             text_tokens.next()
             a = text_tokens.get_token()
             lexical_writer.write(text_tokens.get_token(), self.PARAM)

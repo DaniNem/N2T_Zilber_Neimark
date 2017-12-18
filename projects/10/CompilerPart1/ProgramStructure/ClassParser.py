@@ -30,3 +30,4 @@ if __name__ == "__main__":
     tokenizer = JT(r"C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.jack")
     a = ClassParser(tokenizer, writer)
     a.run()
+    writer.writeXML(r"C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.xml")

@@ -41,7 +41,7 @@ class SubRoutineDec(object):
             return False
         lexical_writer.write(name, "keyword")
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), "fuck")
+        lexical_writer.write(text_tokens.get_token())
         a = text_tokens.get_token()
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.METHOD_NAME)

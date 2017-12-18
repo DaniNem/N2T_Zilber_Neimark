@@ -23,7 +23,7 @@ class VarDecParser(object):
             return False
         lexical_writer.write(token, self.VAR)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), "fuck")  # write variable type
+        lexical_writer.write(text_tokens.get_token())  # write variable type
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
         text_tokens.next()
