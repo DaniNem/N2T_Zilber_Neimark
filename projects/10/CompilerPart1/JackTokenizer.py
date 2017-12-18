@@ -5,10 +5,27 @@ class JackTokenizer(object):
         ftokens = []
         with open(path, 'r') as f:
             for line in f.readlines():
-                ftokens.extend(line.split(' '))
+                if ('"' in line):
+                    flag = True
+                    while flag:
+                        idx = line.find('"')
+                        ftokens.extend(line[:idx].split(' '))
+                        line = line[idx:]
+                        idx = line.find('"',1) + 1
+                        if(idx == 0 ):
+                            #this can happen only in a comment
+                            ftokens.extend(line.split(' '))
+                            break;
+                        ftokens.append(line[:idx])
+                        line = line[idx:]
+                        if line.find('"') == -1:
+                            flag = False
+                            ftokens.extend(line[:idx].split(' '))
+                else:
+                    ftokens.extend(line.split(' '))
         f = False
         nextInter = []
-        symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*', '/',
+        symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*',
                    '&', '<', '>', '=', '~', '\n', '\t']
         for token in ftokens:
             # remove comments
@@ -65,7 +82,7 @@ class JackTokenizer(object):
 
 if __name__ == '__main__':
     # file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
-    file = r'C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.jack'
+    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\main.jack"
     test = JackTokenizer(file)
     print(test.get_token())
     test.next()

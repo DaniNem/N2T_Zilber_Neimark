@@ -25,12 +25,13 @@ class ClassParser(object):
         self._tokens.next()
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
-        self._lexical.openSub("classVarDec")
-        self.run_class_var_dec(self._tokens, self._lexical)
-        self._lexical.closeSub()
-        self._lexical.openSub("subroutineDec")
-        self.run_subroutine_dec(self._tokens, self._lexical)
-        self._lexical.closeSub()
+
+        c = self.run_class_var_dec(self._tokens, self._lexical)
+        if c:
+            self._lexical.closeSub()
+        c = self.run_subroutine_dec(self._tokens, self._lexical)
+        if c:
+            self._lexical.closeSub()
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
 
@@ -41,8 +42,14 @@ class ClassParser(object):
         :param lexical_writer: writer of xml
         :return: null
         """
+        if text_tokens.get_token() != "static" and text_tokens.get_token() != \
+                "field":
+            return False
+        else:
+            self._lexical.openSub("classVarDec")
         while self.run_var_dec_line(text_tokens, lexical_writer):
             continue
+        return True
 
     def run_var_dec_line(self, text_tokens, lexical_writer):
         """
@@ -76,9 +83,14 @@ class ClassParser(object):
         :param lexical_writer: xml writer
         :return: null
         """
+        name = text_tokens.get_token()
+        if name != "constructor" and name != "function" and name != "method":
+            return False
+        else:
+            self._lexical.openSub("subroutineDec")
         while self.run_subroutine_dec_line(text_tokens, lexical_writer):
             continue
-
+        return True
     def run_subroutine_dec_line(self, text_tokens, lexical_writer):
         """
         go over a specific method deceleration and parse to xml
@@ -168,7 +180,7 @@ class ClassParser(object):
 
 if __name__ == "__main__":
     writer = LexicalWriter()
-    tokenizer = JT(r"C:\nand2tetris\projects\10\ArrayTest\main.jack")
+    tokenizer = JT(r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\main.jack")
     a = ClassParser(tokenizer, writer)
     a.run()
-    writer.writeXML(r"C:\nand2tetris\projects\10\CompilerPart1\ma_man.xml")
+    writer.writeXML(r"C:\Users\Admin\Desktop\nand2tetris\projects\10\ArrayTest\ma_man.xml")
