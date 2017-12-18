@@ -11,10 +11,12 @@ class SubRoutineBody(object):
 
     def run(self, text_tokens, lexical_writer):
         lexical_writer.write(text_tokens.get_token(), "symbol")
+        a = text_tokens.get_token()
         text_tokens.next()
         while self.var_dec.run(text_tokens, lexical_writer):
             continue
         self.statements.run(text_tokens, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")
+        what = text_tokens.get_token()
         text_tokens.next()
         return

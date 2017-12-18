@@ -1,5 +1,5 @@
-from ParameterListPasrer import ParameterListParser as PLP
-from SubRoutineBody import SubRoutineBody as SRB
+from ProgramStructure.ParameterListPasrer import ParameterListParser as PLP
+from ProgramStructure.SubRoutineBody import SubRoutineBody as SRB
 
 
 class SubRoutineDec(object):
@@ -42,8 +42,10 @@ class SubRoutineDec(object):
         lexical_writer.write(name, "keyword")
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "fuck")
+        a = text_tokens.get_token()
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.METHOD_NAME)
+        a = text_tokens.get_token()
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.OPEN_BRACKET)
         text_tokens.next()
