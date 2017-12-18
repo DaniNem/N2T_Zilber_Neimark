@@ -46,7 +46,7 @@ class Player {
 		let down_y = up_y + 26;
 
 		if((x > left_x) & (x < right_x)){
-			if((y < down_y) & (y > up_y)){
+ 			if((y < down_y) & (y > up_y)){
 				return true;
 			}
 		}
