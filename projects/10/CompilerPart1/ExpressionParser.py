@@ -19,11 +19,17 @@ class ExpressionParser(object):
         :param lexical_writer: xml writer
         :return: true if the given line is indeed an expression
         """
+        lexical_writer.openSub("expression")
+        lexical_writer.openSub("term")
         self.run_term(text_tokens, lexical_writer)  # parse first term
+        lexical_writer.closeSub()
         while text_tokens.get_token() in self.ops:
             lexical_writer.write(text_tokens.get_token(), "symbol")  # write operand
             text_tokens.next()
+            lexical_writer.openSub("term")
             self.run_term(text_tokens, lexical_writer)  # parse next term
+            lexical_writer.closeSup()
+        lexical_writer.closeSub()
         return True
 
     def run_term(self, text_tokens, lexical_writer):

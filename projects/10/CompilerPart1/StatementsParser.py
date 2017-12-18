@@ -34,11 +34,13 @@ class StatementsParser(object):
          """
         if text_tokens.get_token() != "do":
             return False
+        lexical_writer.openSub("doStatement")
         lexical_writer.write(text_tokens.get_token(), self.DO)  # parse do statement
         text_tokens.next()
         self.expression_parser.run_subroutine_call(text_tokens, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
         text_tokens.next()
+        lexical_writer.closeSub()
         return True
 
     def run_if(self, text_tokens, lexical_writer):
@@ -50,6 +52,7 @@ class StatementsParser(object):
         """
         if text_tokens.get_token() != "if":
             return False
+        lexical_writer.openSub("ifStatement")
         lexical_writer.write(text_tokens.get_token(), self.IF)
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token, "symbol")  # opening brackets
@@ -72,6 +75,7 @@ class StatementsParser(object):
         # in else body
         lexical_writer.write(text_tokens.get_token, "symbol")  # closing brackets
         text_tokens.next()
+        lexical_writer.closeSub()
         return True
 
     def run_let(self, text_tokens, lexical_writer):
@@ -83,6 +87,7 @@ class StatementsParser(object):
         """
         if text_tokens.get_token() != "let":
             return False
+        lexical_writer.openSub("letStatement")
         lexical_writer.write(text_tokens.get_token(), self.LET)
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
@@ -99,6 +104,7 @@ class StatementsParser(object):
         #  after equal sign
         lexical_writer.write(text_tokens.get_token(), "symbol")  # semi colon sign
         text_tokens.next()
+        lexical_writer.closeSub()
         return True
 
     def run_return(self, text_tokens, lexical_writer):
@@ -110,6 +116,7 @@ class StatementsParser(object):
         """
         if text_tokens.get_token() != "return":
             return False
+        lexical_writer.openSub("returnStatement")
         lexical_writer.write(text_tokens.get_token(), self.RETURN)  # parse return
         # statement
         text_tokens.next()
@@ -118,6 +125,7 @@ class StatementsParser(object):
             # parse expression
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
         text_tokens.next()
+        lexical_writer.closeSub()
         return True
 
     def run_while(self, text_tokens, lexical_writer):
@@ -129,6 +137,7 @@ class StatementsParser(object):
         """
         if text_tokens.get_token() != "while":
             return False
+        lexical_writer.openSub("whileStatement")
         lexical_writer.write(text_tokens.get_token(), self.WHILE)  # parse while
         # statement
         text_tokens.next()
@@ -145,4 +154,5 @@ class StatementsParser(object):
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         #  (body)
         text_tokens.next()
+        lexical_writer.closeSub()
         return True

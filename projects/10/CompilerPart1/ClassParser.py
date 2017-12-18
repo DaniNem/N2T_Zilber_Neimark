@@ -25,8 +25,12 @@ class ClassParser(object):
         self._tokens.next()
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
+        self._lexical.openSub("classVarDec")
         self.run_class_var_dec(self._tokens, self._lexical)
+        self._lexical.closeSub()
+        self._lexical.openSub("subroutineDec")
         self.run_subroutine_dec(self._tokens, self._lexical)
+        self._lexical.closeSub()
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
 
@@ -52,7 +56,7 @@ class ClassParser(object):
             return False
         lexical_writer.write(text_tokens.get_token(), self.FIELD_STATIC)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), "fuck")
+        lexical_writer.write(text_tokens.get_token())
         text_tokens.next()
 
         while True:
@@ -87,16 +91,18 @@ class ClassParser(object):
             return False
         lexical_writer.write(name, "keyword")
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), "fuck")
-        a = text_tokens.get_token()
+        lexical_writer.write(text_tokens.get_token())
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.METHOD_NAME)
-        a = text_tokens.get_token()
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.OPEN_BRACKET)
         text_tokens.next()
+        lexical_writer.openSub("parameterList")
         self.run_param_list(text_tokens, lexical_writer)
+        lexical_writer.closeSub()
+        lexical_writer.openSub("subroutineBody")
         lexical_writer.write(text_tokens.get_token(), self.CLOSE_BRACKET)
+        lexical_writer.closeSub()
         text_tokens.next()
         self.run_subroutine_body(text_tokens, lexical_writer)
         return True
@@ -111,12 +117,10 @@ class ClassParser(object):
         while True:
             if text_tokens.get_token() == ")":
                 return
-            lexical_writer.write(text_tokens.get_token(), "fuck")
+            lexical_writer.write(text_tokens.get_token())
             text_tokens.next()
-            a = text_tokens.get_token()
             lexical_writer.write(text_tokens.get_token(), self.PARAM)
             text_tokens.next()
-            a = text_tokens.get_token()
             if text_tokens.get_token() != ",":
                 return
             lexical_writer.write(text_tokens.get_token(), self.COMA)
@@ -124,13 +128,13 @@ class ClassParser(object):
 
     def run_subroutine_body(self, text_tokens, lexical_writer):
         lexical_writer.write(text_tokens.get_token(), "symbol")
-        a = text_tokens.get_token()
         text_tokens.next()
         while self.run_var_dec(text_tokens, lexical_writer):
             continue
+        lexical_writer.openSub("statements")
         self.statements.run(text_tokens, lexical_writer)
+        lexical_writer.closeSub()
         lexical_writer.write(text_tokens.get_token(), "symbol")
-        what = text_tokens.get_token()
         text_tokens.next()
         return
 
@@ -144,25 +148,27 @@ class ClassParser(object):
         token = text_tokens.get_token()
         if token != "var":
             return False
+        lexical_writer.openSub("varDec")
         lexical_writer.write(token, self.VAR)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), "fuck")  # write variable type
+        lexical_writer.write(text_tokens.get_token())  # write variable type
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
         text_tokens.next()
         while text_tokens.get_token() == ",":
-            a = text_tokens.get_token()
             lexical_writer.write(text_tokens.get_token(), "symbol")  # write coma
             text_tokens.next()
             lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
             text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # write semi colon
         text_tokens.next()
+        lexical_writer.closeSub()
         return True
 
 
 if __name__ == "__main__":
     writer = LexicalWriter()
-    tokenizer = JT(r"C:\nand2tetris\projects\09\JumpThingy\Point.jack")
+    tokenizer = JT(r"C:\nand2tetris\projects\10\ArrayTest\main.jack")
     a = ClassParser(tokenizer, writer)
     a.run()
+    writer.writeXML(r"C:\nand2tetris\projects\10\CompilerPart1\ma_man.xml")
