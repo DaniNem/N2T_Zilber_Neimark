@@ -23,15 +23,15 @@ class LetStatementParser(object):
         lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
         text_tokens.next()
         if text_tokens.get_token() == "[":  # check if var_name is an array
-            lexical_writer.write(text_tokens.get_token, "symbol")
+            lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
             self.expression_parser.run(text_tokens, lexical_writer)
-            lexical_writer.write(text_tokens.get_token, "symbol")
+            lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
-        lexical_writer.write(text_tokens.get_token, "symbol")  # get equal sign
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # get equal sign
         text_tokens.next()
         self.expression_parser.run(text_tokens, lexical_writer)  # parse expression
         #  after equal sign
-        lexical_writer.write(text_tokens.get_token, "symbol")  # semi colon sign
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # semi colon sign
         text_tokens.next()
         return True

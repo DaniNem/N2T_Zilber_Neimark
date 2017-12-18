@@ -2,13 +2,21 @@ class Point{
 	field int x_pos;
 	field int y_pos;
 
+	constructor Point new(int x, int y){
+		let x_pos = x;
+		let y_pos = y;
+		return this;
+	}
+
 	method int get_x(){
-		var int x ,y ,z;
+		return x_pos;
 	}
 	method int get_y(){
+		return y_pos;
 	}
 	method void dispose()
 	{
-
+	do Memory.deAlloc(this);
+	return;
 	}
 }

@@ -27,6 +27,6 @@ class ClassParser(object):
 
 if __name__ == "__main__":
     writer = LexicalWriter()
-    tokenizer = JT("C:\\nand2tetris\projects\\09\\JumpThingy\\Point.jack")
+    tokenizer = JT(r"C:\Users\Admin\Desktop\nand2tetris\projects\09\JumpThingy\Point.jack")
     a = ClassParser(tokenizer, writer)
     a.run()

@@ -42,5 +42,5 @@ class SubRoutineParser(object):
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
         self.expression_list_parser.run(text_tokens, lexical_writer)
-        lexical_writer.write(next_token, "symbol")  # closing bracket
+        lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
