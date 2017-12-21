@@ -23,49 +23,54 @@ class JackTokenizer(object):
                             ftokens.extend(line[:idx].split(' '))
                 else:
                     ftokens.extend(line.split(' '))
-        f1 = False
-        f2 = False
-        nextInter = []
         symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*',
-                   '&', '<', '>', '=', '~', '\n', '\t']
-        for token in ftokens:
-            # remove comments
-            if (token == ' ' or token == '' or token == '\n'):
-                continue
-            if (token.startswith('/*')):
-                f1 = True
-                continue
-            if (token.startswith('*/')):
-                f1 = False
-                continue
-            if (token == r'//'):
-                f2 = True
-                continue
-            if (f2 and '\n' in token):
-                f2 = False
-                continue
-            if (not f1 and not f2):
-                nextInter.append(token)
-        nextIter1 = []
-        for t in nextInter:
+                   '&', '<', '>', '=', '~', '\n', '\t','/']
+
+        splitTok = []
+        for t in ftokens:
             temp = list(t)
             indices = []
             for s in symbols:
                 indices.extend([i for i, x in enumerate(temp) if x == s])
             indices.sort()
-            if len(indices) > 0:
+            if len(indices) > 0 and '"' not in t:
                 i = 0
                 for n in indices:
-                    nextIter1.append(t[i:n])
-                    nextIter1.append(t[n:n + 1])
+                    if (t[i:n] != ''):
+                        splitTok.append(t[i:n])
+                    if (t[n:n + 1] != ''):
+                        splitTok.append(t[n:n + 1])
                     i = n + 1
-                nextIter1.append(t[i:])
+                if (t[i:] != ''):
+                    splitTok.append(t[i:])
             else:
-                nextIter1.append(t)
+                splitTok.append(t)
+        f1 = False
+        f2 = False
+        i = 0
+        while i < len(splitTok):
+            if (splitTok[i] == '/' ):
+                if (splitTok[i+1] == '/'):
+                    i += 2
+                    f1 = True
+                    continue
+                if (splitTok[i+1] == '*'):
+                    i += 2
+                    f2 = True
+                    continue
+            if (f1 and splitTok[i] == '\n'):
+                f1 = False
+                i += 1
+                continue
+            if (f2 and splitTok[i] == '*'):
+                if (splitTok[i+1] == '/'):
+                    f2 = False
+                    i += 2
+                    continue
 
-        for i in nextIter1:
-            if (i != '' and i != '\n' and i != '\t'):
-                self.data.append(i)
+            if (not f1 and not f2 and splitTok[i] != '' and splitTok[i] != '\t' and splitTok[i] != '\n'):
+                self.data.append(splitTok[i])
+            i += 1
 
     def hasNext(self):
         return self.currentIndex == len(self.data) - 1
@@ -84,8 +89,10 @@ class JackTokenizer(object):
 if __name__ == '__main__':
     # file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
     file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\Square\SquareGame.jack"
+    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\1\Cannon.jack"
     test = JackTokenizer(file)
     print(test.get_token())
     test.next()
     print(test.get_token())
     print(test.data)
+
