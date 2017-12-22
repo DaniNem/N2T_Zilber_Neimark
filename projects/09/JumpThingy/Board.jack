@@ -1,4 +1,8 @@
 class Board{
+/**
+board class - representing the board of the game
+*/
+
 field Array enemy;
 field Enemy enemy1;
 field Enemy enemy2;
@@ -124,8 +128,6 @@ method void handleEnemy()
 		{
 			let e = enemy[i - 1];
 			let flag = e.atLimit();
-			//do Output.printInt(flag); 
-			//do Output.println(); 
 			if (flag)
 			{
 				

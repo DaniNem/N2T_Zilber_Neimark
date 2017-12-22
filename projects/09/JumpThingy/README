@@ -1,0 +1,22 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 9
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+Board.jack - representing the board of the game
+Enemy.jack - representing the Enemy in the game 
+Main.jack - the brain of the game
+Player.jack - representing the Player in the game
+Point.jack - representing a Point in the game
+README
+
+Remarks
+-------
+* cool cool cool!

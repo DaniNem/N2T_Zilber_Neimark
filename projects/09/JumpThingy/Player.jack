@@ -1,4 +1,7 @@
 class Player {
+/**
+Player class - representing the Player in the game
+*/
 	field int direction;
 	field boolean is_in_air;
 	field int jump_counter;

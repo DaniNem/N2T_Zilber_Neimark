@@ -1,4 +1,7 @@
 class Enemy{
+/**
+Enemy class - representing the Enemy in the game
+*/
 field int pos;
 static int y;
 static int w;

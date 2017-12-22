@@ -1,4 +1,7 @@
 class Point{
+/**
+Point class - representing a Point in the game
+*/
 	field int x_pos;
 	field int y_pos;
 

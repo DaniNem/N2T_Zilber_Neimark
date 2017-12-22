@@ -1,5 +1,8 @@
-/** Computes the average of a sequence of integers */
+
 class Main {
+/**
+Main class - the brain of the game
+*/
  function void main()
  {
  	var Player mario;
