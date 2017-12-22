@@ -36,7 +36,7 @@ class JackTokenizer(object):
         #print(splitTok)
         while i < len(splitTok):
             #z = splitTok[i]
-            if (not strF and splitTok[i] == '/' ):
+            if (not f1 and not f2 and not strF and splitTok[i] == '/' ):
                 if (splitTok[i+1] == '/'):
                     i += 2
                     f1 = True
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\1\Cannon.jack"
     file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack"
     file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\6\in3.jack"
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\6\simpleCommentTest.jack"
+    #file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\6\simpleCommentTest.jack"
     test = JackTokenizer(file)
     print(test.get_token())
     test.next()
