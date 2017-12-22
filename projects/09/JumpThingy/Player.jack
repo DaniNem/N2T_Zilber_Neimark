@@ -62,14 +62,10 @@ Player class - representing the Player in the game
 		var int up_y;
 		var int right_x;
 		var int down_y;
-		//var int x;
-		//var int y;
 		let left_x = 32;
 		let right_x = left_x + 26;
-		let up_y = (pos_y / 32) - 5;
+		let up_y = (Math.divide(pos_y,32)) - 5;
 		let down_y = up_y + 26;
-		//let x = p.get_x();
-		//let y = p.get_y();
 		if((p.get_x() > left_x) & (p.get_x() < right_x)){
 			if((p.get_y() < down_y) & (p.get_y() > up_y)){
 				return true;
