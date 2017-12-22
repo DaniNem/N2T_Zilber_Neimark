@@ -138,7 +138,6 @@ class ExpressionParser(object):
         if text_tokens.get_token() == ")":
             lexical_writer.closeSub()
             return True
-        a = text_tokens.get_token()
         self.run(text_tokens, lexical_writer)
         while text_tokens.get_token() == ",":
             lexical_writer.write(text_tokens.get_token(), "symbol")
