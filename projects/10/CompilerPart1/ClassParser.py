@@ -177,7 +177,7 @@ class ClassParser(object):
 
 if __name__ == "__main__":
     writer = LexicalWriter()
-    tokenizer = JT(r"C:\nand2tetris\projects\10\Square\Square.jack")
+    tokenizer = JT(r"C:\nand2tetris\projects\10\Square\Main.jack")
     a = ClassParser(tokenizer, writer)
     a.run()
     writer.writeXML(r"C:\nand2tetris\projects\10\Square\ma_man.xml")
