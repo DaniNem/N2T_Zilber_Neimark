@@ -14,12 +14,12 @@ class StatementsParser(object):
     def __init__(self):
         pass
 
-    def run(self, text_tokens, lexical_writer):
+    def run(self, text_tokens, lexical_writer, bypass=False):
         more_statements = True
         sub_flag = False
         term = text_tokens.get_token()
         if term == "do" or term == "if" or term == "let" or term == "while" or \
-                        term == "return":
+                        term == "return" or bypass:
             lexical_writer.openSub("statements")
             sub_flag = True
         while more_statements:
@@ -73,7 +73,8 @@ class StatementsParser(object):
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening brackets
         text_tokens.next()
-        self.run(text_tokens, lexical_writer)  # parse statements
+
+        self.run(text_tokens, lexical_writer, True)  # parse statements
         # in if body
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
@@ -84,7 +85,7 @@ class StatementsParser(object):
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
-        self.run(text_tokens, lexical_writer)  # parse statements
+        self.run(text_tokens, lexical_writer, True)  # parse statements
         # in else body
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
