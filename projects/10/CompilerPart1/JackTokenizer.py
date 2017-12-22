@@ -3,12 +3,13 @@ class JackTokenizer(object):
         self.currentIndex = 0
         self.data = []
         ftokens = []
+        #split by lines
         with open(path, 'r') as f:
             for line in f.readlines():
                 ftokens.append(line)
         symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*',
                    '&', '<', '>', '=', '~', '\n', '\t','/','"',' ']
-
+        # split by symbols
         splitTok = []
         for t in ftokens:
             temp = list(t)
@@ -33,10 +34,9 @@ class JackTokenizer(object):
         strF = False
         strData = ''
         i = 0
-        #print(splitTok)
+        #remove comments and parse the data to tokens
         while i < len(splitTok):
-            #z = splitTok[i]
-            if (not strF and splitTok[i] == '/' ):
+            if (not f1 and not f2 and not strF and splitTok[i] == '/' ):
                 if (splitTok[i+1] == '/'):
                     i += 2
                     f1 = True
@@ -86,17 +86,4 @@ class JackTokenizer(object):
     def get_token(self):
         return self.data[self.currentIndex]
 
-
-if __name__ == '__main__':
-    # file = r'C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack'
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\Square\SquareGame.jack"
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\1\Cannon.jack"
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\danielTest\Main.jack"
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\6\in3.jack"
-    file = r"C:\Users\Admin\Desktop\nand2tetris\projects\10\tests\6\simpleCommentTest.jack"
-    test = JackTokenizer(file)
-    print(test.get_token())
-    test.next()
-    print(test.get_token())
-    print(test.data)
 

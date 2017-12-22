@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-import xml.dom.minidom as minidom
-
-
 class LexicalWriter(object):
+    '''
+    xml writer
+    '''
     def __init__(self):
         self.root = ET.Element("class")
         self.subElements = [self.root]
@@ -32,7 +32,7 @@ class LexicalWriter(object):
 
 
     def writeXML(self, path):
-        tree = ET.ElementTree(self.root)
+        #tree = ET.ElementTree(self.root)
         self.__indent(self.root)
         a = ET.tostring(self.root, short_empty_elements=False).decode("utf-8")
         #patch to support the bug in the origin
