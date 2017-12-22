@@ -15,14 +15,21 @@ class StatementsParser(object):
         pass
 
     def run(self, text_tokens, lexical_writer, bypass=False):
-        more_statements = True
-        sub_flag = False
+        """
+        run a parser on jack statements and convert to xml tags
+        :param text_tokens: given jack file
+        :param lexical_writer: xml writer
+        :param bypass: given flag
+        :return:
+        """
+        more_statements = True  # check if more statements exists
+        sub_flag = False  # check need to open new sub
         term = text_tokens.get_token()
         if term == "do" or term == "if" or term == "let" or term == "while" or \
                         term == "return" or bypass:
             lexical_writer.openSub("statements")
             sub_flag = True
-        while more_statements:
+        while more_statements:  # run over the statements
             a = self.run_do(text_tokens, lexical_writer)
             b = self.run_if(text_tokens, lexical_writer)
             c = self.run_let(text_tokens, lexical_writer)
@@ -44,9 +51,7 @@ class StatementsParser(object):
             return False
         lexical_writer.openSub("doStatement")
         lexical_writer.write(text_tokens.get_token(), self.DO)  # parse do statement
-        a = text_tokens.get_token()
         text_tokens.next()
-        b = text_tokens.get_token()
         self.expression_parser.run_subroutine_call(text_tokens, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
         text_tokens.next()
@@ -78,7 +83,7 @@ class StatementsParser(object):
         # in if body
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
-        if text_tokens.get_token() != "else":
+        if text_tokens.get_token() != "else":  # check if else statement exists
             lexical_writer.closeSub()
             return True
         lexical_writer.write(text_tokens.get_token(), "keyword")  # opening brackets
@@ -164,7 +169,7 @@ class StatementsParser(object):
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening
         # bracket (body)
         text_tokens.next()
-        self.run(text_tokens, lexical_writer)
+        self.run(text_tokens, lexical_writer, True)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         #  (body)
         text_tokens.next()

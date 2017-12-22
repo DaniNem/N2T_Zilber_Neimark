@@ -1,5 +1,3 @@
-from JackTokenizer import JackTokenizer as JT
-from LexicalWriter import LexicalWriter
 from StatementsParser import StatementsParser as SP
 
 
@@ -15,6 +13,11 @@ class ClassParser(object):
     VAR = "keyword"
 
     def __init__(self, tokens, lexical):
+        """
+        get text token and xml writer
+        :param tokens:
+        :param lexical:
+        """
         self._tokens = tokens
         self._lexical = lexical
 
@@ -173,11 +176,3 @@ class ClassParser(object):
         text_tokens.next()
         lexical_writer.closeSub()
         return True
-
-
-if __name__ == "__main__":
-    writer = LexicalWriter()
-    tokenizer = JT(r"C:\nand2tetris\projects\10\Square\Main.jack")
-    a = ClassParser(tokenizer, writer)
-    a.run()
-    writer.writeXML(r"C:\nand2tetris\projects\10\Square\ma_man.xml")
