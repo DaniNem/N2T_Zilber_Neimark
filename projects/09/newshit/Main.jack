@@ -1,18 +1,25 @@
 
 class Main {
-/**
-Main class - the brain of the game
-*/
- function void main()
+field int a;
+field char b;
+static int c;
+
+ constructor Main new()
+ {
+	return this;
+ } 
+ function void main(int x, char y, boolean z)
  {
  	var int a;
-	let a = Output.printInt((5*6));
-	do Math.divide(5,2);
-	while (a>4){
-	let a = a+5;
-	}
-		
-	do Main2.foo();
+	var int c;
+	//var boolean b;
+	let a = 5+(c*8);
+	//let a = a + (Main.f(1,2,3)*5);
+	
 	return;
+ }
+ function int f(int x, int y , int z)
+ {
+	return 1;
  }
 } 

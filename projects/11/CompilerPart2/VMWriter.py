@@ -25,7 +25,7 @@ class VMwriter(object):
         :param idx:
         :return:
         '''
-        self._f.write("push "+segment+" "+idx + "\n")
+        self._f.write("push "+segment+" "+str(idx) + "\n")
 
     def writePop(self,segment,idx):
         '''
@@ -34,7 +34,7 @@ class VMwriter(object):
         :param idx:
         :return:
         '''
-        self._f.write("pop " + segment + " " + idx + "\n")
+        self._f.write("pop " + segment + " " + str(idx) + "\n")
 
     def writeAritmetic(self,command):
         '''
@@ -72,7 +72,7 @@ class VMwriter(object):
         :param nArgs:
         :return:
         '''
-        self._f.write("call " + name + " " + nArgs + "\n")
+        self._f.write("call " + name + " " + str(nArgs) + "\n")
     def writeFunction(self,name,nLocals):
         '''
 
@@ -80,7 +80,7 @@ class VMwriter(object):
         :param nLocals:
         :return:
         '''
-        self._f.write("function " + name + " " + nLocals + "\n")
+        self._f.write("function " + name + " " + str(nLocals) + "\n")
 
     def writeReturn(self):
         '''

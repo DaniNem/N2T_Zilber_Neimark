@@ -1,7 +1,7 @@
 from ClassParser import ClassParser as cp
 from LexicalWriter import LexicalWriter as lw
 from JackTokenizer import JackTokenizer as JT
-
+from VMWriter import VMwriter as VMW
 import sys
 import os
 if __name__ == "__main__":
@@ -15,8 +15,11 @@ if __name__ == "__main__":
         files = [os.path.join(sys.argv[1], dir) for dir in
                  os.listdir(sys.argv[1]) if dir.endswith(".jack")]
     for fileName in files:  # go over the files and convert them
-        writer = lw()
+        writer1 = lw()
+        writer = VMW(fileName.replace(".jack","~.vm"))
+
         tokenizer = JT(fileName)
-        a = cp(tokenizer, writer)
+        a = cp(tokenizer, writer,writer1)
         a.run()
-        writer.writeXML(fileName.replace(".jack",".xml"))
+        a._st.print()
+        writer1.writeXML(fileName.replace(".jack","%.xml"))
