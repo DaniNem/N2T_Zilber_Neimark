@@ -1,9 +1,9 @@
 
-class Main {
+class Main2 {
 /**
 Main class - the brain of the game
 */
- function void main()
+ function void foo()
  {
  	var int a;
 	let a = Output.printInt((5*6));
@@ -12,7 +12,7 @@ Main class - the brain of the game
 	let a = a+5;
 	}
 		
-	do Main2.foo();
+	
 	return;
  }
 } 
