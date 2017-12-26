@@ -1,0 +1,18 @@
+
+class Main {
+/**
+Main class - the brain of the game
+*/
+ function void main()
+ {
+ 	var int a;
+	let a = Output.printInt((5*6));
+	do Math.divide(5,2);
+	while (a>4){
+	let a = a+5;
+	}
+		
+	
+	return;
+ }
+} 

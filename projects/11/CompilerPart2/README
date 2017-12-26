@@ -1,0 +1,24 @@
+amitsilber, daninem
+===============================================================================
+Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
+Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
+===============================================================================
+
+                           Project 10
+                           ----------------------- 
+  
+
+Submitted Files
+---------------
+JackAnalyzer.py - main file. Run the code
+ClassParser.py - parse the overall structure of a class
+ExpressionParser.py - parse jack expression to xml tags
+JackTokenizer.py - take jack file and convert to a list of tokens
+LexicalWriter.py - writer to xml file
+StatementsParser.py - parse jack statements
+Makefile
+README
+
+Remarks
+-------
+* cool cool cool!

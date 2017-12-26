@@ -1,4 +1,4 @@
-echo '====YGameMain.xml====' 
+yecho '====YGameMain.xml====' 
 diff -w YGameMain.xml YGameMainA.xml
 echo '====Array.xml===='
 diff -w ArrayA.xml Array.xml
