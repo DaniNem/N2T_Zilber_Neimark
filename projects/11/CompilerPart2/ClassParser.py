@@ -105,27 +105,32 @@ class ClassParser(object):
         :param lexical_writer: xml writer
         :return: true if line is subroutine deceleration
         """
-        name = text_tokens.get_token()  # subroutine type
-        if name != "constructor" and name != "function" and name != "method":
+        subroutine_type = text_tokens.get_token()  # subroutine type
+        if subroutine_type != "constructor" and subroutine_type != "function" \
+                and subroutine_type != "method":
             return False
+
         self._lexical.openSub("subroutineDec")
-        lexical_writer.write(name, "keyword")
+        lexical_writer.write(subroutine_type, "keyword")
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token())
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), self.METHOD_NAME)
+        subroutine_name = text_tokens.get_token()
+        lexical_writer.write(subroutine_name, self.METHOD_NAME)
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), self.OPEN_BRACKET)
         text_tokens.next()
         lexical_writer.openSub("parameterList")
-        self.run_param_list(text_tokens, writer, lexical_writer, name)  # parameters
+        self.run_param_list(text_tokens, writer, lexical_writer,
+                            subroutine_type)  # parameters
         # list
         lexical_writer.closeSub()
         lexical_writer.write(text_tokens.get_token(), self.CLOSE_BRACKET)
         text_tokens.next()
         lexical_writer.openSub("subroutineBody")
         self.run_subroutine_body(text_tokens, writer,
-                                 lexical_writer)  # subroutine body
+                                 lexical_writer, subroutine_name,
+                                 subroutine_type)  # subroutine body
         lexical_writer.closeSub()
         lexical_writer.closeSub()
         return True
@@ -154,7 +159,8 @@ class ClassParser(object):
             lexical_writer.write(text_tokens.get_token(), self.COMA)
             text_tokens.next()
 
-    def run_subroutine_body(self, text_tokens, writer, lexical_writer):
+    def run_subroutine_body(self, text_tokens, writer, lexical_writer,
+                            subroutine_name, subroutine_type):
         """
         parse subroutine body
         :param text_tokens: given jack tokens
@@ -165,6 +171,16 @@ class ClassParser(object):
         text_tokens.next()
         while self.run_var_dec(text_tokens, writer, lexical_writer):
             continue
+        writer.writeFunction(self._class_name + '.' + subroutine_name,
+                             self._st.count('VAR'))
+
+        if subroutine_type == "constructor":
+            writer.writePush("constant", self._st.count["FIELD"])
+            writer.writeCall("Memory.alloc", 1)
+            writer.writePop("pointer", 0)
+        elif subroutine_type == "method":
+            writer.writePush("argument", 0)
+            writer.writePop("pointer", 0)
         self.statements.run(text_tokens, writer, self._st, lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")
         text_tokens.next()
