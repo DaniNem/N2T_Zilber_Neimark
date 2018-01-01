@@ -122,7 +122,7 @@ class ExpressionParser(object):
             text_tokens.next()
             self.run(text_tokens, writer, symbol_table, lexical_writer)
             writer.writePush(symbol_table.type_of(term), symbol_table.index_of(term))
-            writer.writerArithmetic("add")
+            writer.writeArithmetic("add")
             writer.writePop("pointer", 1)
             writer.writePush("that", 0)
             lexical_writer.write(text_tokens.get_token(), "symbol")  # closing
