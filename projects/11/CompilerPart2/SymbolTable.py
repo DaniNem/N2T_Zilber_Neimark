@@ -7,6 +7,7 @@ class SymbolTable(object):
     def __init__(self):
         self.class_symbols = dict()
         self.subroutine_symbols = dict()
+        self.class_name = ""
         return
 
     def start_subroutine(self):

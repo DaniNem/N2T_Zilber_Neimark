@@ -34,6 +34,7 @@ class ClassParser(object):
         self._tokens.next()
         self._lexical.write(self._tokens.get_token(), "identifier")  # class name
         self._class_name = self._tokens.get_token()
+        self._st.class_name = self._class_name
         self._tokens.next()
         self._lexical.write(self._tokens.get_token(), "symbol")
         self._tokens.next()
@@ -142,7 +143,7 @@ class ClassParser(object):
           :param lexical_writer: xml writer
           :return: null
           """
-        if subroutine_type == "method" or subroutine_type == "constructor":
+        if subroutine_type == "method":
             self._st.define("this", self._class_name, "ARG")
         while True:  # run over parameters until closing bracket is reached
             if text_tokens.get_token() == ")":

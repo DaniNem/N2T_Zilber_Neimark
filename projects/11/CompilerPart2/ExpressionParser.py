@@ -75,7 +75,7 @@ class ExpressionParser(object):
 
         elif term in self.keyword_constant:  # check if a keyword constant
             if term == 'true':
-                writer.writePush("constant", 1)
+                writer.writePush("constant", 0)
                 writer.writeAritmetic("not")
             elif term == 'false':
                 writer.writePush("constant", 0)
@@ -155,7 +155,7 @@ class ExpressionParser(object):
         if next_token == "(":
             counter = self.run_expression_list(text_tokens, writer, symbol_table,
                                                lexical_writer, True)
-            writer.writeCall(symbol_table.type_of("this") + "." + current_token,
+            writer.writeCall(symbol_table.class_name + "." + current_token,
                              counter)
             lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
@@ -174,7 +174,7 @@ class ExpressionParser(object):
         return True
 
     def run_expression_list(self, text_tokens, writer, symbol_table,
-                            lexical_writer, flag):
+                            lexical_writer, is_method):
         """
         parse an expression list from jack to xml
         :param text_tokens: given jack code
@@ -183,7 +183,7 @@ class ExpressionParser(object):
         """
         lexical_writer.openSub("expressionList")
         counter = 0
-        if flag:
+        if is_method:
             counter += 1
             writer.writePush("pointer", 0)
         if text_tokens.get_token() == ")":
