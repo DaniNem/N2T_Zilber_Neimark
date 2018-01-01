@@ -70,6 +70,10 @@ class StatementsParser(object):
         if text_tokens.get_token() != "if":
             return False
         lexical_writer.openSub("ifStatement")
+        if_true = "IF_TRUE" + writer.getLabelIndex()
+        if_false = "IF_FALSE" + writer.getLabelIndex()
+        if_end = "IF_END" + writer.getLabelIndex()
+        writer.incLabelIndex()
         lexical_writer.write(text_tokens.get_token(), self.IF)
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening brackets
@@ -77,11 +81,13 @@ class StatementsParser(object):
         self.expression_parser.run(text_tokens, writer, symbol_table,
                                    lexical_writer)  # parse expression
         # in brackets
+        writer.writeIf(if_true)  # if goto
+        writer.writeGoTo(if_false)  # goto
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening brackets
         text_tokens.next()
-
+        writer.writeLabel(if_true)
         self.run(text_tokens, writer, symbol_table, lexical_writer,
                  True)  # parse statements
         # in if body
@@ -89,17 +95,21 @@ class StatementsParser(object):
         text_tokens.next()
         if text_tokens.get_token() != "else":  # check if else statement exists
             lexical_writer.closeSub()
+            writer.writeLabel(if_false)  # goto
             return True
+        writer.writeGoTo(if_end)
         lexical_writer.write(text_tokens.get_token(), "keyword")  # opening brackets
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
+        writer.writeLabel(if_false)  # goto
         self.run(text_tokens, writer, symbol_table, lexical_writer,
                  True)  # parse statements
         # in else body
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing brackets
         text_tokens.next()
         lexical_writer.closeSub()
+        writer.writeLabel(if_end)  # goto
         return True
 
     def run_let(self, text_tokens, writer, symbol_table, lexical_writer):
