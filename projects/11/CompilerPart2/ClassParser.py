@@ -172,10 +172,10 @@ class ClassParser(object):
         while self.run_var_dec(text_tokens, writer, lexical_writer):
             continue
         writer.writeFunction(self._class_name + '.' + subroutine_name,
-                             self._st.count('VAR'))
+                             self._st.var_count('VAR'))
 
         if subroutine_type == "constructor":
-            writer.writePush("constant", self._st.count["FIELD"])
+            writer.writePush("constant", self._st.var_count("FIELD"))
             writer.writeCall("Memory.alloc", 1)
             writer.writePop("pointer", 0)
         elif subroutine_type == "method":
