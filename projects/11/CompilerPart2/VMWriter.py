@@ -50,7 +50,7 @@ class VMwriter(object):
         :param lable:
         :return:
         '''
-        self._f.write("lable " + lable +"\n")
+        self._f.write("label " + lable +"\n")
     def writeGoTo(self,label):
         '''
 

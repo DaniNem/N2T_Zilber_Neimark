@@ -181,22 +181,30 @@ class StatementsParser(object):
         if text_tokens.get_token() != "while":
             return False
         lexical_writer.openSub("whileStatement")
+        while_exp = "WHILE_EXP" + str(writer.getLabelIndex())
+        while_end = "WHILE_END" + str(writer.getLabelIndex())
+        writer.incLabelIndex()
         lexical_writer.write(text_tokens.get_token(), self.WHILE)  # parse while
         # statement
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
+        writer.writeLabel(while_exp)
         self.expression_parser.run(text_tokens, writer, symbol_table,
                                    lexical_writer)  # parse while
         # expression
+        writer.writeAritmetic("not")
+        writer.writeIf(while_end)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening
         # bracket (body)
         text_tokens.next()
         self.run(text_tokens, writer, symbol_table, lexical_writer, True)
+        writer.writeGoTo(while_exp)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         #  (body)
         text_tokens.next()
         lexical_writer.closeSub()
+        writer.writeLabel(while_end)
         return True
