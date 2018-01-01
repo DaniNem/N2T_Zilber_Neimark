@@ -55,6 +55,7 @@ class StatementsParser(object):
         self.expression_parser.run_subroutine_call(text_tokens, writer, symbol_table,
                                                    lexical_writer)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
+        writer.writePop("temp", 0)
         text_tokens.next()
         lexical_writer.closeSub()
         return True
@@ -113,7 +114,8 @@ class StatementsParser(object):
         lexical_writer.openSub("letStatement")
         lexical_writer.write(text_tokens.get_token(), self.LET)
         text_tokens.next()
-        lexical_writer.write(text_tokens.get_token(), self.VAR_NAME)
+        var_name = text_tokens.get_token()
+        lexical_writer.write(var_name, self.VAR_NAME)
         text_tokens.next()
         if text_tokens.get_token() == "[":  # check if var_name is an array
             lexical_writer.write(text_tokens.get_token(), "symbol")
@@ -130,6 +132,8 @@ class StatementsParser(object):
         lexical_writer.write(text_tokens.get_token(), "symbol")  # semi colon sign
         text_tokens.next()
         lexical_writer.closeSub()
+        writer.writePop(symbol_table.kind_of(var_name),
+                        symbol_table.index_of(var_name))
         return True
 
     def run_return(self, text_tokens, writer, symbol_table, lexical_writer):
