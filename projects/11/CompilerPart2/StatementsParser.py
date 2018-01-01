@@ -135,7 +135,7 @@ class StatementsParser(object):
                                        lexical_writer)
             lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
-            writer.writePush(symbol_table.type_of(var_name), symbol_table.index_of(
+            writer.writePush(symbol_table.kind_of(var_name), symbol_table.index_of(
                 var_name))
             writer.writeAritmetic("add")
             is_array = True

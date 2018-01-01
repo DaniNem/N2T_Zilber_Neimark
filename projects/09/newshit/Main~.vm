@@ -1,7 +1,17 @@
-push pointer 0
-push constant 5
-push local 1
-push constant 8
-call Math.multiply 2
+function Main.main 0
+push argument 0
+pop pointer 0
+push constant 1
+push this 1
 add
 push constant 1
+push this 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return

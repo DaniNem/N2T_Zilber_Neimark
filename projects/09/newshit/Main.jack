@@ -1,25 +1,21 @@
 
 class Main {
-field int a;
-field char b;
-static int c;
 
- constructor Main new()
+field int b;
+field Array arr;
+static int c;
+ method void main(int x, char y, boolean z)
  {
-	return this;
- } 
- function void main(int x, char y, boolean z)
- {
- 	var int a;
-	var int c;
-	//var boolean b;
-	let a = 5+(c*8);
-	//let a = a + (Main.f(1,2,3)*5);
+	
+	let arr[1] = arr[1];
+	
+	//let b = arr[1];
+	
+	
+	
+	
 	
 	return;
- }
- function int f(int x, int y , int z)
- {
-	return 1;
+	
  }
 } 
