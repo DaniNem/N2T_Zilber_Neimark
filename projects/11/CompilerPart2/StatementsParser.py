@@ -149,6 +149,8 @@ class StatementsParser(object):
             self.expression_parser.run(text_tokens, writer, symbol_table,
                                        lexical_writer)
             # parse expression
+        else:
+            writer.writePush("constant", 0)
         writer.writeReturn()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # parse semi colon
         text_tokens.next()
