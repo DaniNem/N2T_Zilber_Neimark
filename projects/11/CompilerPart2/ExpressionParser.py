@@ -161,6 +161,9 @@ class ExpressionParser(object):
             text_tokens.next()
             return True
         subroutine_name = text_tokens.get_token()
+        if symbol_table.index_of(current_token) != None:
+            writer.writePush(symbol_table.kind_of(current_token),
+                             symbol_table.index_of(current_token))
         lexical_writer.write(subroutine_name, "identifier")  # write
         # subroutine name
         text_tokens.next()
@@ -168,7 +171,15 @@ class ExpressionParser(object):
         text_tokens.next()
         counter = self.run_expression_list(text_tokens, writer, symbol_table,
                                            lexical_writer, False)
-        writer.writeCall(current_token + "." + subroutine_name, counter)
+        # TODO check
+        if symbol_table.index_of(current_token) != None:
+            # writer.writePush(symbol_table.type_of(current_token),
+            #                  symbol_table.index_of(current_token))
+            counter += 1
+            writer.writeCall(symbol_table.type_of(current_token) + "." +
+                             subroutine_name, counter)
+        else:
+            writer.writeCall(current_token + "." + subroutine_name, counter)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
         return True

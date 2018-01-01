@@ -2,13 +2,13 @@ function Bat.new 0
 push constant 20
 call Memory.alloc 1
 pop pointer 0
-push argument 1
+push argument 0
 pop this 15
-push argument 2
+push argument 1
 pop this 16
-push argument 3
+push argument 2
 pop this 17
-push argument 4
+push argument 3
 pop this 18
 push constant 2
 pop this 19
@@ -28,7 +28,7 @@ return
 function Bat.show 0
 push argument 0
 pop pointer 0
-push constant 1
+push constant 0
 not
 call Screen.setColor 1
 pop temp 0
@@ -136,7 +136,7 @@ push this 18
 add
 call Screen.drawRectangle 4
 pop temp 0
-push constant 1
+push constant 0
 not
 call Screen.setColor 1
 pop temp 0
@@ -184,7 +184,7 @@ push this 18
 add
 call Screen.drawRectangle 4
 pop temp 0
-push constant 1
+push constant 0
 not
 call Screen.setColor 1
 pop temp 0

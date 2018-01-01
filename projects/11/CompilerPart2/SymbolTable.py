@@ -2,12 +2,11 @@ from Symbol import Symbol
 
 
 class SymbolTable(object):
-    count = {"STATIC": 0, "FIELD": 0, "ARG": 0, "VAR": 0}
-
     def __init__(self):
         self.class_symbols = dict()
         self.subroutine_symbols = dict()
         self.class_name = ""
+        self.count = {"STATIC": 0, "FIELD": 0, "ARG": 0, "VAR": 0}
         return
 
     def start_subroutine(self):
@@ -54,4 +53,3 @@ class SymbolTable(object):
         print(self.class_symbols)
         print("------")
         print(self.subroutine_symbols)
-
