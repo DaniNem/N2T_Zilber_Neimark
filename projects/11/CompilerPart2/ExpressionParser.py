@@ -83,8 +83,6 @@ class ExpressionParser(object):
                 writer.writePush("constant", 0)
             elif term == 'this':
                 writer.writePush("pointer", 0)
-            else:
-                raise (11)
             lexical_writer.write(term, "keyword")
 
             text_tokens.next()
@@ -114,7 +112,6 @@ class ExpressionParser(object):
         elif self.run_subroutine_call(text_tokens, writer, symbol_table,
                                       lexical_writer):
             # check if call to subroutine
-            # TODO run!!!
             return True
 
         elif next_token == "[":  # check if term is a call to array cell
@@ -124,6 +121,10 @@ class ExpressionParser(object):
             lexical_writer.write(next_token, "symbol")  # opening bracket
             text_tokens.next()
             self.run(text_tokens, writer, symbol_table, lexical_writer)
+            writer.writePush(symbol_table.type_of(term), symbol_table.index_of(term))
+            writer.writerArithmetic("add")
+            writer.writePop("pointer", 1)
+            writer.writePush("that", 0)
             lexical_writer.write(text_tokens.get_token(), "symbol")  # closing
             # bracket
             text_tokens.next()
