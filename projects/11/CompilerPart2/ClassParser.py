@@ -142,7 +142,7 @@ class ClassParser(object):
           :param lexical_writer: xml writer
           :return: null
           """
-        if subroutine_type == "method":
+        if subroutine_type == "method" or subroutine_type == "constructor":
             self._st.define("this", self._class_name, "ARG")
         while True:  # run over parameters until closing bracket is reached
             if text_tokens.get_token() == ")":

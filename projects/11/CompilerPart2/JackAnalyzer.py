@@ -21,5 +21,4 @@ if __name__ == "__main__":
         tokenizer = JT(fileName)
         a = cp(tokenizer, writer,writer1)
         a.run()
-        a._st.print()
         writer1.writeXML(fileName.replace(".jack","%.xml"))
