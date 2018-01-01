@@ -109,7 +109,7 @@ class ClassParser(object):
         if subroutine_type != "constructor" and subroutine_type != "function" \
                 and subroutine_type != "method":
             return False
-
+        self._st.start_subroutine()
         self._lexical.openSub("subroutineDec")
         lexical_writer.write(subroutine_type, "keyword")
         text_tokens.next()
