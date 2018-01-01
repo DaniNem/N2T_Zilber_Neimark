@@ -70,9 +70,9 @@ class StatementsParser(object):
         if text_tokens.get_token() != "if":
             return False
         lexical_writer.openSub("ifStatement")
-        if_true = "IF_TRUE" + writer.getLabelIndex()
-        if_false = "IF_FALSE" + writer.getLabelIndex()
-        if_end = "IF_END" + writer.getLabelIndex()
+        if_true = "IF_TRUE" + str(writer.getLabelIndex())
+        if_false = "IF_FALSE" + str(writer.getLabelIndex())
+        if_end = "IF_END" + str(writer.getLabelIndex())
         writer.incLabelIndex()
         lexical_writer.write(text_tokens.get_token(), self.IF)
         text_tokens.next()
