@@ -159,14 +159,15 @@ class ExpressionParser(object):
             lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
             return True
-        lexical_writer.write(text_tokens.get_token(), "identifier")  # write
+        subroutine_name = text_tokens.get_token()
+        lexical_writer.write(subroutine_name, "identifier")  # write
         # subroutine name
         text_tokens.next()
         lexical_writer.write(text_tokens.get_token(), "symbol")  # opening bracket
         text_tokens.next()
         counter = self.run_expression_list(text_tokens, writer, symbol_table,
                                            lexical_writer, False)
-        writer.writeCall(current_token, counter)
+        writer.writeCall(current_token + "." + subroutine_name, counter)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
         return True
