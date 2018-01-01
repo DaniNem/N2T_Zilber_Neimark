@@ -154,7 +154,7 @@ class ExpressionParser(object):
         if next_token == "(":
             counter = self.run_expression_list(text_tokens, writer, symbol_table,
                                                lexical_writer, True)
-            writer.writeCall(symbol_table.kind_of("this") + "." + current_token,
+            writer.writeCall(symbol_table.type_of("this") + "." + current_token,
                              counter)
             lexical_writer.write(text_tokens.get_token(), "symbol")
             text_tokens.next()
@@ -166,7 +166,7 @@ class ExpressionParser(object):
         text_tokens.next()
         counter = self.run_expression_list(text_tokens, writer, symbol_table,
                                            lexical_writer, False)
-        writer.writerCall(current_token, counter)
+        writer.writeCall(current_token, counter)
         lexical_writer.write(text_tokens.get_token(), "symbol")  # closing bracket
         text_tokens.next()
         return True
