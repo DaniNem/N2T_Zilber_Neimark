@@ -16,10 +16,8 @@ if __name__ == "__main__":
         files = [os.path.join(sys.argv[1], dir) for dir in
                  os.listdir(sys.argv[1]) if dir.endswith(".jack")]
     for fileName in files:  # go over the files and convert them
-        writer1 = lw()
         writer = VMW(fileName.replace(".jack", ".vm"))
 
         tokenizer = JT(fileName)
-        a = cp(tokenizer, writer, writer1)
+        a = cp(tokenizer, writer)
         a.run()
-        writer1.writeXML(fileName.replace(".jack", "%.xml"))

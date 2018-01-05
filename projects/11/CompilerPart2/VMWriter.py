@@ -1,111 +1,122 @@
 class VMwriter(object):
-    def __init__(self,file):
+    """
+    write vm code
+    """
+    def __init__(self, file):
         '''
 
-        :param file: text
+        :param file: given text file
         '''
-        self._f = open(file,'w')
+        self._f = open(file, 'w')
         self._labelIndex = 0
+
     def getLabelIndex(self):
         '''
 
-        :return:
+        :return: current index
         '''
         return self._labelIndex
+
     def incLabelIndex(self):
         '''
-
-        :return:
+        increase index by one
+        :return: none
         '''
         self._labelIndex += 1
-    def writePush(self,segment,idx):
+
+    def writePush(self, segment, idx):
         '''
 
-        :param segment:
-        :param idx:
-        :return:
+        :param segment: given memory segment
+        :param idx: index of variable
+        :return: none
         '''
-        self._f.write("push "+segment+" "+str(idx) + "\n")
+        self._f.write("push " + segment + " " + str(idx) + "\n")
 
-    def writePop(self,segment,idx):
+    def writePop(self, segment, idx):
         '''
 
-        :param segment:
-        :param idx:
-        :return:
+        :param segment: given memory segment
+        :param idx: index of variable
+        :return: none
         '''
         self._f.write("pop " + segment + " " + str(idx) + "\n")
 
-    def writeAritmetic(self,command):
+    def writeAritmetic(self, command):
         '''
 
-        :param command:
-        :return:
+        :param command: arithmetic command
+        :return: none
         '''
         self._f.write(command + "\n")
 
-    def writeLabel(self,lable):
+    def writeLabel(self, lable):
         '''
+        write a vm label
+        :param lable: given label
+        :return: none
+        '''
+        self._f.write("label " + lable + "\n")
 
-        :param lable:
-        :return:
+    def writeGoTo(self, label):
         '''
-        self._f.write("label " + lable +"\n")
-    def writeGoTo(self,label):
-        '''
-
-        :param label:
-        :return:
+        write go to command
+        :param label: given label
+        :return: none
         '''
         self._f.write("goto " + label + "\n")
-    def writeIf(self,label):
-        '''
 
-        :param label:
-        :return:
+    def writeIf(self, label):
+        '''
+        write if command
+        :param label: given label
+        :return: none
         '''
         self._f.write("if-goto " + label + "\n")
-    def writeCall(self,name,nArgs):
-        '''
 
-        :param name:
-        :param nArgs:
-        :return:
+    def writeCall(self, name, nArgs):
+        '''
+        write function call command
+        :param name: given function name
+        :param nArgs: number of arguments
+        :return: none
         '''
         self._f.write("call " + name + " " + str(nArgs) + "\n")
-    def writeFunction(self,name,nLocals):
-        '''
 
-        :param name:
-        :param nLocals:
-        :return:
+    def writeFunction(self, name, nLocals):
+        '''
+        declare a function
+        :param name: function's name
+        :param nLocals: number of local variables
+        :return: none
         '''
         self._f.write("function " + name + " " + str(nLocals) + "\n")
 
     def writeReturn(self):
         '''
-
-        :return:
+        write return statement
+        :return: none
         '''
 
-        self._f.write("return"+"\n")
+        self._f.write("return" + "\n")
+
     def close(self):
         '''
-
-        :return:
+        close vm file
+        :return: none
         '''
-        self._f.close();
+        self._f.close()
 
 
 if __name__ == '__main__':
     wr = VMwriter('test.vm')
-    wr.writePush("CONST","1")
-    wr.writePop("LOCAL","3")
+    wr.writePush("CONST", "1")
+    wr.writePop("LOCAL", "3")
     wr.writeAritmetic("ADD")
     wr.writeLabel("label1")
     wr.writeGoTo("label2")
     wr.writeIf("label3")
-    wr.writeCall("pipi","2")
-    wr.writeFunction("kaki","2")
+    wr.writeCall("pipi", "2")
+    wr.writeFunction("kaki", "2")
     wr.writeReturn()
     wr.close()

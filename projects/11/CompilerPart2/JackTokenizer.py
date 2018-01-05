@@ -3,12 +3,12 @@ class JackTokenizer(object):
         self.currentIndex = 0
         self.data = []
         ftokens = []
-        #split by lines
+        # split by lines
         with open(path, 'r') as f:
             for line in f.readlines():
                 ftokens.append(line)
         symbols = ['{', '}', '.', '(', ')', '[', ']', ',', ';', '+', '-', '*',
-                   '&', '<', '>', '=', '~', '\n', '\t','/','"',' ']
+                   '&', '<', '>', '=', '~', '\n', '\t', '/', '"', ' ']
         # split by symbols
         splitTok = []
         for t in ftokens:
@@ -34,14 +34,14 @@ class JackTokenizer(object):
         strF = False
         strData = ''
         i = 0
-        #remove comments and parse the data to tokens
+        # remove comments and parse the data to tokens
         while i < len(splitTok):
-            if (not f1 and not f2 and not strF and splitTok[i] == '/' ):
-                if (splitTok[i+1] == '/'):
+            if (not f1 and not f2 and not strF and splitTok[i] == '/'):
+                if (splitTok[i + 1] == '/'):
                     i += 2
                     f1 = True
                     continue
-                if (splitTok[i+1] == '*'):
+                if (splitTok[i + 1] == '*'):
                     i += 2
                     f2 = True
                     continue
@@ -50,7 +50,7 @@ class JackTokenizer(object):
                 i += 1
                 continue
             if (f2 and splitTok[i] == '*'):
-                if (splitTok[i+1] == '/'):
+                if (splitTok[i + 1] == '/'):
                     f2 = False
                     i += 2
                     continue
@@ -63,13 +63,14 @@ class JackTokenizer(object):
                     strF = False
                 else:
                     strF = True
-                i+= 1
+                i += 1
                 continue
             if (strF):
                 strData += splitTok[i]
                 i += 1
                 continue
-            if (not strF and not f1 and not f2 and splitTok[i] != '' and splitTok[i] != '\t' and splitTok[i] != '\n' and splitTok[i] != ' '):
+            if (not strF and not f1 and not f2 and splitTok[i] != '' and splitTok[
+                i] != '\t' and splitTok[i] != '\n' and splitTok[i] != ' '):
                 self.data.append(splitTok[i])
             i += 1
 
@@ -85,5 +86,3 @@ class JackTokenizer(object):
 
     def get_token(self):
         return self.data[self.currentIndex]
-
-
