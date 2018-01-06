@@ -14,10 +14,13 @@
 # makefile. 
  
 all: 
-	chmod a+x JackAnalyzer
+	chmod a+x JackCompiler
 	chmod a+x JackAnalyzer.py
 	chmod a+x ClassParser.py
 	chmod a+x ExpressionParser.py
 	chmod a+x JackTokenizer.py
 	chmod a+x LexicalWriter.py
 	chmod a+x StatementsParser.py
+	chmod a+x Symbol.py
+	chmod a+x SymbolTable.py
+	chmod a+x VMWriter.py
