@@ -4,7 +4,7 @@ Amit Silber, ID 204630537, amit.silber@mail.huji.ac.il
 Daniel Neimark, ID 204128656, daniel.neimark@mail.huji.ac.il
 ===============================================================================
 
-                           Project 10
+                           Project 11
                            ----------------------- 
   
 
@@ -12,10 +12,13 @@ Submitted Files
 ---------------
 JackAnalyzer.py - main file. Run the code
 ClassParser.py - parse the overall structure of a class
-ExpressionParser.py - parse jack expression to xml tags
+ExpressionParser.py - parse jack expression to vm code
 JackTokenizer.py - take jack file and convert to a list of tokens
-LexicalWriter.py - writer to xml file
+VMWriter.py - writer vm code
 StatementsParser.py - parse jack statements
+Symbol.py - represent a variable in a class or a function
+SymbolTable.py - a table of variables declared as member class or local variables
+of a function
 Makefile
 README
 
