@@ -286,6 +286,7 @@ class Output {
 				let cursor_i = 21;
 			}
 		}
+		do Output.printOnlychar(32);
 	return;
     }
 }
