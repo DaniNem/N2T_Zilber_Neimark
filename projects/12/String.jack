@@ -12,7 +12,7 @@
  */
 class String {
 	field int stringLength;
-	filed int maxStringLength;
+	field int maxStringLength;
 	field Array stringArray;
 
 
@@ -27,7 +27,7 @@ class String {
 
     /** Disposes this string. */
     method void dispose() {
-    	do Memort.deAlloc(this);
+    	do Memory.deAlloc(this);
     	return;
     }
 
@@ -51,7 +51,7 @@ class String {
     method String appendChar(char c) {
     	let stringArray[stringLength] = c;
     	let stringLength = stringLength + 1;
-    	return;
+    	return this;
     }
 
     /** Erases the last character from this string. */
@@ -63,7 +63,7 @@ class String {
     /** Returns the integer value of this string, 
      *  until a non-digit character is detected. */
     method int intValue() {
-    	var int val,index,digit;
+    	var int val,index,d;
     	let val = 0;
     	let index = 0;
     	while (index < stringLength){
@@ -82,17 +82,16 @@ class String {
     	return;
        }
 
-    method void setIntHelper(int val,int index){
+    method String setIntHelper(int val,int index){
     	var int lastDigit;
-    	var char c;
     	var String res;
-    	let lastDigit = val - ((val/10)*10);
-    	let c = lastDigit + 48; 
+    	let lastDigit = val - ((val/10)*10); 
     	if (val < 10){
-    		Let stringArray[index] = c;
+    		let stringArray[index] = lastDigit + 48;
     		return this;
     	} else {
-    		return setIntHelper(val/10).appendChar(c);
+			let res = setIntHelper(val/10,index+1);
+    		return res.appendChar(lastDigit + 48);
     	}
     }
 
