@@ -12,7 +12,7 @@
  */
 class String {
 	field int stringLength;
-	filed int maxStringLength;
+	field int maxStringLength;
 	field Array stringArray;
 
 
@@ -21,13 +21,15 @@ class String {
     constructor String new(int maxLength) {
     	let stringLength = 0;
     	let maxStringLength = maxLength;
-    	let stringArray = Array.new(maxLength);
+        if(maxLength>0){
+    	   let stringArray = Array.new(maxLength);
+        }
     	return this;
     }
 
     /** Disposes this string. */
     method void dispose() {
-    	do Memort.deAlloc(this);
+    	do Memory.deAlloc(this);
     	return;
     }
 
@@ -51,7 +53,7 @@ class String {
     method String appendChar(char c) {
     	let stringArray[stringLength] = c;
     	let stringLength = stringLength + 1;
-    	return;
+    	return this;
     }
 
     /** Erases the last character from this string. */
@@ -64,13 +66,22 @@ class String {
      *  until a non-digit character is detected. */
     method int intValue() {
     	var int val,index,digit;
+        var boolean flag;
+        let flag = false;
     	let val = 0;
     	let index = 0;
+        if (stringArray[0] = 45){
+            let flag = true;
+            let index = 1;
+        }
     	while (index < stringLength){
-    		let d = stringArray[index] - 48;
-    		let val = (val * 10) + d;
+    		let digit = stringArray[index] - 48;
+    		let val = (val * 10) + digit;
     		let index = index + 1;
     	}
+        if (flag){
+            let val = -val;
+        }
     	return val;
 
     }
@@ -78,22 +89,28 @@ class String {
     /** Sets this string to hold a representation of the given value. */
     method void setInt(int val) {
     	let stringLength = 0;
+        if(val < 0){
+            let val = -val;
+            do appendChar(45);
+            let stringLength = 1;
+            do setIntHelper(val,1);
+            return;
+        }
     	do setIntHelper(val,0);
     	return;
        }
 
-    method void setIntHelper(int val,int index){
+    method String setIntHelper(int val,int index){
     	var int lastDigit;
-    	var char c;
     	var String res;
     	let lastDigit = val - ((val/10)*10);
-    	let c = lastDigit + 48; 
     	if (val < 10){
-    		Let stringArray[index] = c;
+    		do appendChar(lastDigit+48);
     		return this;
-    	} else {
-    		return setIntHelper(val/10).appendChar(c);
-    	}
+        }else{
+            let res  = setIntHelper(val/10,index+1);
+            return res.appendChar(lastDigit+48);
+        }
     }
 
     /** Returns the new line character. */
