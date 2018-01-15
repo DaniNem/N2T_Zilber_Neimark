@@ -9,6 +9,7 @@
  */
 class Math {
 	static Array bitTest;
+	static int divmem;
     /** Initializes the library. */
     function void init() {
 		var int i;
@@ -99,15 +100,17 @@ class Math {
 		var int q;
 		if ((y > x) | (y < 0))
 		{
+			let divmem = 0;
 			return 0;
 		}
 		let q = Math.divideHelper(x,y+y);
-		if(x-Math.multiply(q+q,y)<y)
+		if(x-divmem<y)
 		{
 			return q+q;
 		}
 		else
 		{
+			let divmem = divmem + y;
 			return q + q + 1;
 		}
 			
