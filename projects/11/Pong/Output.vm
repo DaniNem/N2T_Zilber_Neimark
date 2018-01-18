@@ -1715,5 +1715,8 @@ push constant 21
 pop static 1
 label IF_FALSE1
 label IF_FALSE0
+push constant 32
+call Output.printOnlychar 1
+pop temp 0
 push constant 0
 return
