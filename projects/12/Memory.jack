@@ -45,33 +45,33 @@ class Memory {
     	let prev = heap;
     	let current = heap;
 
-    	while(current[1] < size){
+    	while(current[1] < size){ // go over till find free segment
     		if(current[0] = 0){
     			return -1;
     		}
     		let prev = current;
     		let current = current[0];
     	}
-    	if(current[1] > (size + 2)){
+    	if(current[1] > (size + 2)){ // check if can use portion of segemtn
     		let addr = current + current[1] - size;
     		let addr[-1] = size;
     		let current[1] = current[1] - size - 2;
     		return addr;
     	}
-        if(prev = current){
+        if(prev = current){ // check if first segment
             let heap = heap[0];
         } else {
     	   let prev[0] = current[0];
         }   
     	let addr = current + 2;
-    	let addr[-1] = size;
+    	let addr[-1] = size; // update size
     	return addr;
     }
 
     /** De-allocates the given object (cast as an array) by making
      *  it available for future allocations. */
     function void deAlloc(Array o) {
-    	let o[-2] = heap;
+    	let o[-2] = heap; // add to beginning of the list
     	let heap = o-2; 
     	return;
     }    
