@@ -1,0 +1,35 @@
+function Main.main 0
+push constant 140
+push constant 60
+push constant 30
+call Screen.drawCircle1 3
+pop temp 0
+push constant 0
+push constant 60
+call Screen.drawPixel 2
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 140
+push constant 60
+push constant 30
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 110
+push constant 115
+push constant 250
+call Screen.drawHorizntalLine 3
+pop temp 0
+push constant 110
+push constant 252
+push constant 115
+push constant 252
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return

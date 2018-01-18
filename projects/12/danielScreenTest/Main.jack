@@ -1,0 +1,54 @@
+class Main
+
+{
+function void main()
+{/*
+	var int i;
+	var int to;
+	let i = 5;
+	let to = 66;
+	do Screen.drawHorizntalLine(i,to,0);
+	while (~(i=to))
+	{
+		
+		do Screen.drawPixel(i,5);
+		let i = i + 1; 
+		
+	}
+	
+	
+	
+	do Screen.clearScreen();
+	
+	do Screen.setColor(false);
+	let i = 5;
+	do Screen.drawHorizntalLine(i,to,0);
+	while (~(i=to))
+	{
+		do Screen.setColor(false);
+		do Screen.drawPixel(i,5);
+		let i = i + 1; 
+		
+	}
+	*/
+	
+	 do Screen.drawCircle1(140,60,30);          // sun
+	 do Screen.drawPixel(0,60);          // sun
+	 do Screen.setColor(false);          // sun
+	 do Screen.drawCircle(140,60,30);          // sun
+	 
+	  do Screen.setColor(true);
+	  //170
+	  do Screen.drawHorizntalLine(110,115,250);
+	  do Screen.drawLine(110,252,115,252);
+	  
+	
+	  //do Screen.drawCircle(200,60,30);          // sun
+	 //do Screen.drawPixel(0,60);          // sun
+	 //do Screen.setColor(false);          // sun
+	 //do Screen.drawCircle1(200,60,30);     
+		
+	return;
+}
+
+}

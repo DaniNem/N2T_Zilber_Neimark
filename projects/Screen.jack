@@ -12,7 +12,6 @@
 class Screen {
     static boolean colour;
     static Array bitTest;
-    static Array fullRows;
     static Array screen;
 
     /** Initializes the Screen. */
@@ -35,44 +34,18 @@ class Screen {
         let bitTest[13] = 8192;
         let bitTest[14] = 16384;
         let bitTest[15] = 16384 + 16384;
-		
-		let fullRows = Array.new(16);
-		let fullRows[16] = 0;
-		let fullRows[15] = bitTest[16];
-        let fullRows[14] = -16384;
-        let fullRows[13] = -8192;
-        let fullRows[12] = -4096;
-        let fullRows[11] = -2048;
-        let fullRows[10] = -1024;
-        let fullRows[9] = -512;
-        let fullRows[8] = -256;
-        let fullRows[7] = -128;
-        let fullRows[6] = -64;
-        let fullRows[5] = -32;
-        let fullRows[4] = -16;
-        let fullRows[3] = -8;
-        let fullRows[2] = -4;
-        let fullRows[1] = -2;
-        let fullRows[0] = -1;
-        
-		
         let screen = 16384;
-		
         return;
     }
 
     /** Erases the entire screen. */
     function void clearScreen() {
         var int i;
-        var boolean b;
         let i = 0;
-		let b = colour;
-		let colour = false;
-        while (i < 256){
-            do Screen.drawHorizntalLine(0,511,i);
-			let i = i + 1;
+        while (i < 8192){
+            let screen[i] = 0;
+            let i = i+1;
         }
-		let colour = b;
         return;
     }
 
@@ -91,85 +64,12 @@ class Screen {
             let screen[address] = screen[address] | bitTest[x&15];
             return;
         }
-        let screen[address] = screen[address] & (~bitTest[x&15]);
+        let screen[address] = screen[address] & ~bitTest[x&15];
         return;
 
 
     }
-	function void drawHorizntalLine(int x1,int x2,int y)
-	{
-		var int x_s,x_e,address,x_s_m,x_e_m;
-		let x_s = (x1/16);
-		let x_e = (x2/16);
-		
-		let x_s_m = x1 - ((x1/16)*16);
-		let x_e_m = x2 - ((x2/16)*16);
-		
-		//in case they in the same block
-		if (x_s = x_e)
-		{
-			let address = (32 * y) + x_s;
-			if (colour)
-			{
-				let screen[address] = screen[address] | (fullRows[x_s_m] & ~fullRows[x_e_m]);
-			}
-			else
-			{
-				let screen[address] = screen[address] & ~(fullRows[x_s_m] & ~fullRows[x_e_m]);
-			}
-			return;
-			
-			
-		}
-		else
-		{
-			/*while (~(x_s_m = 0))
-				{
-					do Screen.drawPixel(x1,y);
-					let x1 = x1+1;
-					let x_s_m = x1 - ((x1/16)*16);
-				}
-			while (~(x_e_m = 0))
-				{
-					do Screen.drawPixel(x2,y);
-					let x2 = x2-1;
-					let x_e_m = x2 - ((x2/16)*16);
-				}*/
-			if (colour)
-			{
-				
-				address = (32 * y) + x_s;
-				let screen[address] = screen[address] | fullRows[x_s_m+1];
-				let address = (32 * y) + x_e;
-				let screen[address] = screen[address] | ~fullRows[x_e_m];
-				let x_s = x_s + 1;
-				while(~((x_e - x_s)=0))
-				{
-					let address = (32 * y) + x_s;
-					let screen[address] = -1;
-					let x_s = x_s + 1;
-				}
-			}
-			
-			else
-			{
-				let address = (32 * y) + x_s;
-				let screen[address] = screen[address] & ~fullRows[x_s_m];
-				let address = (32 * y) + x_e;
-				let screen[address] = screen[address] & fullRows[x_e_m+1];
-				let x_s = x_s + 1;
-				while(~((x_e - x_s)=0))
-				{
-					let address = (32 * y) + x_s;
-					let screen[address] = 0;
-					let x_s = x_s + 1;
-				}
-			}
-			return;
-		}
-		
-		
-	}
+
     function void drawLine(int x1, int y1, int x2, int y2) {
         var int a, b, aInc, bInc, dx, dy, diff, temp;
         let a = 0;
@@ -189,11 +89,9 @@ class Screen {
         let dy = y2 - y1;
 
 
-        if (dy = 0) { // horizontal line
-			//TODO
-			//do Screen.drawHorizntalLine(x1,x2,y1);
+        if (dy = 0) { // hrizontal line
             while (~(a = dx)) {
-               let a = a + 1;
+                let a = a + 1;
                 do Screen.drawPixel(x1 + a, y1);
           }
           return;
@@ -244,36 +142,19 @@ class Screen {
         let dx = x2 - x1;
         let dy = y2 - y1;
 
-        while(~((y2 - y1) = 0)){
-            /*while(a < (dx+1)){
+        while(b < (dy+1)){
+            while(a < (dx+1)){
                 do Screen.drawPixel(x1+a,y1+b);
                 let a = a + 1;
             }
             let a = 0;
             let b = b + 1;
-			*/
-			do Screen.drawHorizntalLine(x1,x2,y2);
-			let y2 = y2 - 1;
         }
         return;
     }
 
     /** Draws a filled circle of radius r<=181 around (x,y), using the current color. */
     function void drawCircle(int x, int y, int r) {
-        var int dy,dx, rSquare,yPos;
-        let rSquare = r * r;
-        let dy = -r;
-        while(~(dy = r)) {
-            let dx = Math.sqrt(rSquare-(dy*dy));
-            let yPos = y + dy;
-            do Screen.drawHorizntalLine((x-dx),(x+dx),yPos);
-            let dy = dy + 1;
-        }
-        return;
-    }
-	
-	
-	function void drawCircle1(int x, int y, int r) {
         var int dy,dx, rSquare,yPos;
         let rSquare = r * r;
         let dy = -r;
