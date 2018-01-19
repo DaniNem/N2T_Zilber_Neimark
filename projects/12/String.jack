@@ -20,7 +20,12 @@ class String {
      *  and initial length of 0. */
     constructor String new(int maxLength) {
     	let stringLength = 0;
+		if (maxLength < 1)
+		{
+			let maxLength = 1;
+		}
     	let maxStringLength = maxLength;
+		
     	let stringArray = Array.new(maxLength);
     	return this;
     }
@@ -62,37 +67,59 @@ class String {
 
     /** Returns the integer value of this string, 
      *  until a non-digit character is detected. */
-    method int intValue() {
-    	var int val,index,d;
-    	let val = 0;
-    	let index = 0;
-    	while (index < stringLength){
-    		let d = stringArray[index] - 48;
-    		let val = (val * 10) + d;
-    		let index = index + 1;
-    	}
-    	return val;
-
-    }
+    method int intValue() 
+	
+	
+	{
+        var int index,val;
+        var boolean isNeg;
+        
+        let isNeg = false;
+        let val = 0;
+        let index = 0;
+        if(stringArray[index] = 45)
+        {
+            let isNeg = true;
+            let index = index + 1;
+        }
+        while(index < stringLength)
+        {
+            let val = (stringArray[index] - 48) + (val * 10);
+            let index = index + 1;
+        }
+        if(isNeg)
+        {
+            let val = val * -1;
+		}
+		return val;
+	}
+     
 
     /** Sets this string to hold a representation of the given value. */
-    method void setInt(int val) {
-    	let stringLength = 0;
-    	do setIntHelper(val,0);
-    	return;
+    method void setInt(int val) {		
+        let stringLength = 0;
+        if(val < 0)
+        {
+            let val = val * -1;
+            do appendChar(45);
+        }
+        do setIntHelper(val);
+        return;
+ 
        }
 
-    method String setIntHelper(int val,int index){
+    method void setIntHelper(int val){
     	var int lastDigit;
-    	var String res;
-    	let lastDigit = val - ((val/10)*10); 
-    	if (val < 10){
-    		let stringArray[index] = lastDigit + 48;
-    		return this;
-    	} else {
-			let res = setIntHelper(val/10,index+1);
-    		return res.appendChar(lastDigit + 48);
-    	}
+    	var int res;
+		if(val = 0)
+        {
+            return;
+        }
+		let res = val / 10;
+		let lastDigit = val - (res * 10);
+    	do setIntHelper(res);
+		do appendChar(lastDigit + 48);
+    	return;
     }
 
     /** Returns the new line character. */

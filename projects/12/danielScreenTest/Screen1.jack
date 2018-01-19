@@ -9,13 +9,13 @@
  * of 256 pixels each (indexed 0..255, left to right). The top left pixel on 
  * the screen is indexed (0,0).
  */
-class Screen {
+class Screen1 {
     static boolean colour;
     static Array bitTest;
     static Array fullRows;
     static Array screen;
 
-    /** Initializes the Screen. */
+    /** Initializes the Screen1. */
     function void init() {
         let colour = true;
         let bitTest = Array.new(16);
@@ -69,7 +69,7 @@ class Screen {
 		let b = colour;
 		let colour = false;
         while (i < 256){
-            do Screen.drawHorizntalLine(0,511,i);
+            do Screen1.drawHorizntalLine(0,511,i);
 			let i = i + 1;
         }
 		let colour = b;
@@ -102,8 +102,8 @@ class Screen {
 		let x_s = (x1/16);
 		let x_e = (x2/16);
 		
-		let x_s_m = x1 - ((x1/16)*16);
-		let x_e_m = x2 - ((x2/16)*16);
+		let x_s_m = x1 - (x_s*16);
+		let x_e_m = x2 - (x_e*16) ;
 		
 		//in case they in the same block
 		if (x_s = x_e)
@@ -111,11 +111,11 @@ class Screen {
 			let address = (32 * y) + x_s;
 			if (colour)
 			{
-				let screen[address] = screen[address] | (fullRows[x_s_m] & ~fullRows[x_e_m]);
+				let screen[address] = screen[address] | (fullRows[x_s_m] & ~fullRows[x_e_m+1]);
 			}
 			else
 			{
-				let screen[address] = screen[address] & ~(fullRows[x_s_m] & ~fullRows[x_e_m]);
+				let screen[address] = screen[address] & ~(fullRows[x_s_m] & ~fullRows[x_e_m+1]);
 			}
 			return;
 			
@@ -123,27 +123,15 @@ class Screen {
 		}
 		else
 		{
-			/*while (~(x_s_m = 0))
-				{
-					do Screen.drawPixel(x1,y);
-					let x1 = x1+1;
-					let x_s_m = x1 - ((x1/16)*16);
-				}
-			while (~(x_e_m = 0))
-				{
-					do Screen.drawPixel(x2,y);
-					let x2 = x2-1;
-					let x_e_m = x2 - ((x2/16)*16);
-				}*/
 			if (colour)
 			{
 				
-				address = (32 * y) + x_s;
-				let screen[address] = screen[address] | fullRows[x_s_m+1];
+				let address = (32 * y) + x_s;
+				let screen[address] = screen[address] | fullRows[x_s_m];
 				let address = (32 * y) + x_e;
-				let screen[address] = screen[address] | ~fullRows[x_e_m];
+				let screen[address] = screen[address] | ~fullRows[x_e_m+1];
 				let x_s = x_s + 1;
-				while(~((x_e - x_s)=0))
+				while(~(x_e = x_s))
 				{
 					let address = (32 * y) + x_s;
 					let screen[address] = -1;
@@ -158,7 +146,7 @@ class Screen {
 				let address = (32 * y) + x_e;
 				let screen[address] = screen[address] & fullRows[x_e_m+1];
 				let x_s = x_s + 1;
-				while(~((x_e - x_s)=0))
+				while(~(x_e = x_s))
 				{
 					let address = (32 * y) + x_s;
 					let screen[address] = 0;
@@ -191,11 +179,13 @@ class Screen {
 
         if (dy = 0) { // horizontal line
 			//TODO
-			//do Screen.drawHorizntalLine(x1,x2,y1);
-            while (~(a = dx)) {
-               let a = a + 1;
-                do Screen.drawPixel(x1 + a, y1);
-          }
+			do Screen1.drawHorizntalLine(x1,x2,y1);
+            //while (~(a = dx)) {
+              
+            //    do Screen1.drawPixel(x1 + a, y1);
+			//	 let a = a + 1;
+         // }
+		  //do Screen1.drawPixel(x1 + a, y1);
           return;
         }
         if (dy < 0) { // check need to increment y or decrement it
@@ -204,33 +194,48 @@ class Screen {
             let bInc = 1;
         }
 
-        if (dx = 0) { // vertical line
+        if (dx = 0) 
+		{ // vertical line
+			
             while (~(b = dy)) {
-                let b = b + bInc;
-                do Screen.drawPixel(x1, y1 + b);
+                do Screen1.drawPixel(x1, y1 + b);
+				let b = b + bInc;
           }
+		  do Screen1.drawPixel(x1, y1 + b);
           return;
         }
 
-        while ((a < dx) & (b < dy)) {
+		
+		if ((a < dx) & (b < dy))
+		{
+			
+			while ((a < dx) | (b < dy)) {
+			do Screen1.drawPixel(x1 + a, y1 + b);
             let diff = (a * dy) - (b * dx);
             if (diff < 0) {
                 let a = a + 1;
             } else {
                 let b = b + 1;
             }
-          do Screen.drawPixel(x1 + a, y1 + b);
-        }
-
-        while ((a < dx) & (b > dy)) {
+			}
+			do Screen1.drawPixel(x1 + a, y1 + b);
+		}
+        
+		else
+		{
+			while ((a < dx) | (b > dy)) {
+			do Screen1.drawPixel(x1 + a, y1 + b);
             let diff = (a * dy) - (b * dx);
             if (diff > 0) {
                 let a = a + 1;
             } else {
                 let b = b - 1;
             }
-            do Screen.drawPixel(x1 + a, y1 + b);
+            do Screen1.drawPixel(x1 + a, y1 + b);
         }
+		}
+
+        
         return;
     }
 
@@ -241,20 +246,20 @@ class Screen {
         var int a,b,dx,dy;
         let a = 0;
         let b = 0;
-        let dx = x2 - x1;
         let dy = y2 - y1;
 
-        while(~((y2 - y1) = 0)){
+        while(~(y2 = y1)){
             /*while(a < (dx+1)){
-                do Screen.drawPixel(x1+a,y1+b);
+                do Screen1.drawPixel(x1+a,y1+b);
                 let a = a + 1;
             }
             let a = 0;
             let b = b + 1;
 			*/
-			do Screen.drawHorizntalLine(x1,x2,y2);
+			do Screen1.drawHorizntalLine(x1,x2,y2);
 			let y2 = y2 - 1;
         }
+		do Screen1.drawHorizntalLine(x1,x2,y2);
         return;
     }
 
@@ -266,23 +271,10 @@ class Screen {
         while(~(dy = r)) {
             let dx = Math.sqrt(rSquare-(dy*dy));
             let yPos = y + dy;
-            do Screen.drawHorizntalLine((x-dx),(x+dx),yPos);
+            do Screen1.drawHorizntalLine((x-dx),(x+dx),yPos);
             let dy = dy + 1;
         }
         return;
     }
-	
-	
-	function void drawCircle1(int x, int y, int r) {
-        var int dy,dx, rSquare,yPos;
-        let rSquare = r * r;
-        let dy = -r;
-        while(~(dy = r)) {
-            let dx = Math.sqrt(rSquare-(dy*dy));
-            let yPos = y + dy;
-            do Screen.drawLine((x-dx),yPos,(x+dx),yPos);
-            let dy = dy + 1;
-        }
-        return;
-    }
+
 }
