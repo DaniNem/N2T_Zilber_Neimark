@@ -1,4 +1,4 @@
-function Screen.init 0
+function Screen1.init 0
 push constant 0
 not
 pop static 0
@@ -135,7 +135,7 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push constant 17
+push constant 16
 call Array.new 1
 pop static 2
 push constant 16
@@ -297,7 +297,7 @@ push constant 16384
 pop static 3
 push constant 0
 return
-function Screen.clearScreen 2
+function Screen1.clearScreen 2
 push constant 0
 pop local 0
 push static 0
@@ -313,7 +313,7 @@ if-goto WHILE_END0
 push constant 0
 push constant 511
 push local 0
-call Screen.drawHorizntalLine 3
+call Screen1.drawHorizntalLine 3
 pop temp 0
 push local 0
 push constant 1
@@ -325,12 +325,12 @@ push local 1
 pop static 0
 push constant 0
 return
-function Screen.setColor 0
+function Screen1.setColor 0
 push argument 0
 pop static 0
 push constant 0
 return
-function Screen.drawPixel 1
+function Screen1.drawPixel 1
 push constant 32
 push argument 1
 call Math.multiply 2
@@ -389,59 +389,57 @@ push temp 0
 pop that 0
 push constant 0
 return
-function Screen.drawHorizntalLine 6
+function Screen1.drawHorizntalLine 5
 push argument 0
 push constant 16
 call Math.divide 2
-pop local 1
+pop local 0
 push argument 1
 push constant 16
 call Math.divide 2
-pop local 2
+pop local 1
 push argument 0
+push local 0
+push constant 16
+call Math.multiply 2
+sub
+pop local 3
+push argument 1
 push local 1
 push constant 16
 call Math.multiply 2
 sub
 pop local 4
-push argument 1
-push local 2
-push constant 16
-call Math.multiply 2
-sub
-pop local 5
-push constant 32
-push argument 2
-call Math.multiply 2
-pop local 0
+push local 0
 push local 1
-push local 2
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push constant 32
+push argument 2
+call Math.multiply 2
 push local 0
-push local 1
 add
-pop local 3
+pop local 2
 push static 0
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push local 3
+push local 2
 push static 3
 add
-push local 3
+push local 2
 push static 3
 add
 pop pointer 1
 push that 0
-push local 4
+push local 3
 push static 2
 add
 pop pointer 1
 push that 0
-push local 5
+push local 4
 push constant 1
 add
 push static 2
@@ -457,20 +455,20 @@ push temp 0
 pop that 0
 goto IF_END1
 label IF_FALSE1
-push local 3
+push local 2
 push static 3
 add
-push local 3
+push local 2
 push static 3
 add
 pop pointer 1
 push that 0
-push local 4
+push local 3
 push static 2
 add
 pop pointer 1
 push that 0
-push local 5
+push local 4
 push constant 1
 add
 push static 2
@@ -494,41 +492,45 @@ push static 0
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
+push constant 32
+push argument 2
+call Math.multiply 2
 push local 0
-push local 1
 add
-pop local 3
-push local 3
+pop local 2
+push local 2
 push static 3
 add
+push local 2
+push static 3
+add
+pop pointer 1
+push that 0
 push local 3
+push static 2
+add
+pop pointer 1
+push that 0
+or
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 32
+push argument 2
+call Math.multiply 2
+push local 1
+add
+pop local 2
+push local 2
+push static 3
+add
+push local 2
 push static 3
 add
 pop pointer 1
 push that 0
 push local 4
-push static 2
-add
-pop pointer 1
-push that 0
-or
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push local 2
-add
-pop local 3
-push local 3
-push static 3
-add
-push local 3
-push static 3
-add
-pop pointer 1
-push that 0
-push local 5
 push constant 1
 add
 push static 2
@@ -541,24 +543,24 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push local 1
+push local 0
 push constant 1
 add
-pop local 1
+pop local 0
 label WHILE_EXP0
-push local 2
 push local 1
-sub
-push constant 0
+push local 0
 eq
 not
 not
 if-goto WHILE_END0
+push constant 32
+push argument 2
+call Math.multiply 2
 push local 0
-push local 1
 add
-pop local 3
-push local 3
+pop local 2
+push local 2
 push static 3
 add
 push constant 1
@@ -567,79 +569,83 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push local 1
+push local 0
 push constant 1
 add
-pop local 1
+pop local 0
 goto WHILE_EXP0
 label WHILE_END0
 goto IF_END2
 label IF_FALSE2
+push constant 32
+push argument 2
+call Math.multiply 2
 push local 0
-push local 1
 add
-pop local 3
-push local 3
+pop local 2
+push local 2
 push static 3
 add
+push local 2
+push static 3
+add
+pop pointer 1
+push that 0
 push local 3
+push static 2
+add
+pop pointer 1
+push that 0
+not
+and
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 32
+push argument 2
+call Math.multiply 2
+push local 1
+add
+pop local 2
+push local 2
+push static 3
+add
+push local 2
 push static 3
 add
 pop pointer 1
 push that 0
 push local 4
+push constant 1
+add
 push static 2
 add
 pop pointer 1
 push that 0
-not
 and
 pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
 push local 0
-push local 2
-add
-pop local 3
-push local 3
-push static 3
-add
-push local 3
-push static 3
-add
-pop pointer 1
-push that 0
-push local 5
 push constant 1
 add
-push static 2
-add
-pop pointer 1
-push that 0
-and
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 1
-push constant 1
-add
-pop local 1
+pop local 0
 label WHILE_EXP1
-push local 2
 push local 1
-sub
-push constant 0
+push local 0
 eq
 not
 not
 if-goto WHILE_END1
+push constant 32
+push argument 2
+call Math.multiply 2
 push local 0
-push local 1
 add
-pop local 3
-push local 3
+pop local 2
+push local 2
 push static 3
 add
 push constant 0
@@ -647,17 +653,17 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push local 1
+push local 0
 push constant 1
 add
-pop local 1
+pop local 0
 goto WHILE_EXP1
 label WHILE_END1
 label IF_END2
 push constant 0
 return
 label IF_END0
-function Screen.drawLine 8
+function Screen1.drawLine 8
 push constant 0
 pop local 0
 push constant 0
@@ -699,7 +705,7 @@ label IF_TRUE1
 push argument 0
 push argument 2
 push argument 1
-call Screen.drawHorizntalLine 3
+call Screen1.drawHorizntalLine 3
 pop temp 0
 push constant 0
 return
@@ -735,7 +741,7 @@ push argument 0
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 push local 1
 push local 3
@@ -747,7 +753,7 @@ push argument 0
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 push constant 0
 return
@@ -778,7 +784,7 @@ add
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 push local 0
 push local 5
@@ -813,7 +819,7 @@ add
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 goto IF_END4
 label IF_FALSE4
@@ -833,7 +839,7 @@ add
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 push local 0
 push local 5
@@ -866,22 +872,18 @@ add
 push argument 1
 push local 1
 add
-call Screen.drawPixel 2
+call Screen1.drawPixel 2
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2
 label IF_END4
 push constant 0
 return
-function Screen.drawRectangle 4
+function Screen1.drawRectangle 4
 push constant 0
 pop local 0
 push constant 0
 pop local 1
-push argument 2
-push argument 0
-sub
-pop local 2
 push argument 3
 push argument 1
 sub
@@ -889,8 +891,6 @@ pop local 3
 label WHILE_EXP0
 push argument 3
 push argument 1
-sub
-push constant 0
 eq
 not
 not
@@ -898,7 +898,7 @@ if-goto WHILE_END0
 push argument 0
 push argument 2
 push argument 3
-call Screen.drawHorizntalLine 3
+call Screen1.drawHorizntalLine 3
 pop temp 0
 push argument 3
 push constant 1
@@ -906,9 +906,14 @@ sub
 pop argument 3
 goto WHILE_EXP0
 label WHILE_END0
+push argument 0
+push argument 2
+push argument 3
+call Screen1.drawHorizntalLine 3
+pop temp 0
 push constant 0
 return
-function Screen.drawCircle 4
+function Screen1.drawCircle 4
 push argument 2
 push argument 2
 call Math.multiply 2
@@ -941,7 +946,7 @@ push argument 0
 push local 1
 add
 push local 3
-call Screen.drawHorizntalLine 3
+call Screen1.drawHorizntalLine 3
 pop temp 0
 push local 0
 push constant 1

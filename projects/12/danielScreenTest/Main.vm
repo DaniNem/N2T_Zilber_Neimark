@@ -1,0 +1,112 @@
+function Main.main 4
+push constant 250
+pop local 0
+push constant 200
+pop local 2
+push constant 50
+pop local 3
+push constant 200
+pop local 1
+call Screen1.init 0
+pop temp 0
+push local 0
+push local 2
+push local 0
+push local 1
+add
+push local 2
+push local 3
+add
+call Screen1.drawRectangle 4
+pop temp 0
+push local 0
+push constant 4
+sub
+pop local 0
+push local 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop local 0
+label IF_FALSE0
+push constant 0
+call Screen1.setColor 1
+pop temp 0
+push constant 2000
+call Sys.wait 1
+pop temp 0
+push local 0
+push local 1
+add
+push constant 1
+add
+push local 2
+push local 0
+push local 1
+add
+push constant 4
+add
+push local 2
+push local 3
+add
+call Screen1.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen1.setColor 1
+pop temp 0
+push local 0
+push local 2
+push local 0
+push constant 3
+add
+push local 2
+push local 3
+add
+call Screen1.drawRectangle 4
+pop temp 0
+push local 0
+push constant 10
+push local 0
+push constant 3
+add
+push constant 10
+push local 3
+add
+call Screen.drawRectangle 4
+pop temp 0
+push local 0
+push constant 70
+push local 0
+push constant 3
+add
+push constant 70
+push local 3
+add
+call Screen1.drawRectangle 4
+pop temp 0
+push constant 250
+push constant 4
+sub
+push constant 130
+push constant 250
+push constant 1
+sub
+push constant 130
+call Screen.drawLine 4
+pop temp 0
+push constant 250
+push constant 4
+sub
+push constant 135
+push constant 250
+push constant 1
+sub
+push constant 135
+call Screen1.drawLine 4
+pop temp 0
+push constant 0
+return

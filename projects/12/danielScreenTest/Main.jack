@@ -1,0 +1,36 @@
+class Main
+
+{
+function void main()
+{ 
+	var int x,width,y,height;
+	
+	let x = 250;
+	let y = 200;
+	let height = 50;
+	let width = 200;
+	do Screen1.init(); 
+	
+	do Screen1.drawRectangle(x, y, x + width, y + height);
+
+	let x = x - 4;
+
+    if (x < 0) { let x = 0; }
+
+    do Screen1.setColor(false);
+    do Sys.wait(2000);
+	do Screen1.drawRectangle((x + width) + 1, y, (x + width) + 4, y + height);
+    
+	do Screen1.setColor(true);
+	do Screen1.drawRectangle(x, y, x + 3, y + height);
+	do Screen.drawRectangle(x, 10, x + 3, 10 + height);
+	do Screen1.drawRectangle(x, 70, x + 3, 70 + height);
+	
+	
+	do Screen.drawLine(250-4,130,250-1,130);
+	do Screen1.drawLine(250-4,135,250-1,135);
+		
+	return;
+}
+
+}
