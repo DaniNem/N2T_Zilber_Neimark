@@ -38,7 +38,7 @@ class Screen {
 		
 		let fullRows = Array.new(17);
 		let fullRows[16] = 0;
-		let fullRows[15] = bitTest[16];
+		let fullRows[15] = bitTest[15];
         let fullRows[14] = -16384;
         let fullRows[13] = -8192;
         let fullRows[12] = -4096;
