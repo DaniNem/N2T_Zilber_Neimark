@@ -67,6 +67,7 @@ class String {
 
     /** Returns the integer value of this string, 
      *  until a non-digit character is detected. */
+<<<<<<< Updated upstream
     method int intValue() 
 	
 	
@@ -94,6 +95,20 @@ class String {
 		return val;
 	}
      
+=======
+    method int intValue() {
+    	var int val,index,d;
+    	let val = 0;
+    	let index = 0;
+    	while (index < stringLength){
+    		let digit = stringArray[index] - 48;
+    		let val = (val * 10) + digit;
+    		let index = index + 1;
+    	}
+    	return val;
+
+    }
+>>>>>>> Stashed changes
 
     /** Sets this string to hold a representation of the given value. */
     method void setInt(int val) {		
@@ -110,6 +125,7 @@ class String {
 
     method void setIntHelper(int val){
     	var int lastDigit;
+<<<<<<< Updated upstream
     	var int res;
 		if(val = 0)
         {
@@ -120,6 +136,29 @@ class String {
     	do setIntHelper(res);
 		do appendChar(lastDigit + 48);
     	return;
+=======
+<<<<<<< Updated upstream
+=======
+    	var int c;
+>>>>>>> Stashed changes
+    	var String res;
+    	let lastDigit = val - ((val/10)*10); 
+    	if (val < 10){
+<<<<<<< Updated upstream
+    		let stringArray[index] = lastDigit + 48;
+    		return this;
+    	} else {
+			let res = setIntHelper(val/10,index+1);
+    		return res.appendChar(lastDigit + 48);
+=======
+    		let stringArray[index] = lastDigit+48;
+    		return this;
+    	} else {
+    		let res =  setIntHelper(val/10,index+1);
+    		return res.appendChar( lastDigit+48);
+>>>>>>> Stashed changes
+    	}
+>>>>>>> Stashed changes
     }
 
     /** Returns the new line character. */

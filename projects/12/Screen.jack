@@ -177,6 +177,7 @@ class Screen {
         let dy = y2 - y1;
 
 
+<<<<<<< Updated upstream
         if (dy = 0) { // horizontal line
 			//TODO
 			do Screen.drawHorizntalLine(x1,x2,y1);
@@ -187,6 +188,11 @@ class Screen {
          // }
 		  //do Screen.drawPixel(x1 + a, y1);
           return;
+=======
+        if (dy = 0) { // hrizontal line
+            do Screen.drawHorizontalLine(a,dx,x1,y1);
+            return;
+>>>>>>> Stashed changes
         }
         if (dy < 0) { // check need to increment y or decrement it
             let bInc = -1;
@@ -194,6 +200,7 @@ class Screen {
             let bInc = 1;
         }
 
+<<<<<<< Updated upstream
         if (dx = 0) 
 		{ // vertical line
 			
@@ -203,6 +210,11 @@ class Screen {
           }
 		  do Screen.drawPixel(x1, y1 + b);
           return;
+=======
+        if (dx = 0) { // vertical line
+            do Screen.drawVerticalLine(b,dy,x1,y1,bInc);
+            return;
+>>>>>>> Stashed changes
         }
 
 		
@@ -238,6 +250,24 @@ class Screen {
         
         return;
     }
+
+    function void drawHorizontalLine(int a, int dx, int x1, int y1) {
+        while (~(a = dx)) {
+            let a = a + 1;
+            do Screen.drawPixel(x1 + a, y1);
+          }
+          return;
+    }
+
+    function void drawVerticalLine(int b, int dy, int x1, int y1,int bInc) {
+        while (~(b = dy)) {
+            let b = b + bInc;
+            do Screen.drawPixel(x1, y1 + b);
+        }
+        return;
+    }
+
+
 
 
     /** Draws a filled rectangle whose top left corner is (x1, y1)

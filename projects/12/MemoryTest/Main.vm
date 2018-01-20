@@ -94,14 +94,6 @@ pop temp 0
 push constant 3
 call Array.new 1
 pop local 2
-push constant 11111
-call Output.printInt 1
-pop temp 0
-call Output.println 0
-pop temp 0
-push constant 110
-call Output.printInt 1
-pop temp 0
 push constant 0
 push local 2
 add
@@ -129,11 +121,6 @@ call Array.dispose 1
 pop temp 0
 push local 2
 call Array.dispose 1
-pop temp 0
-push constant 0
-call Output.printInt 1
-pop temp 0
-call Output.println 0
 pop temp 0
 push constant 0
 return
